@@ -1,0 +1,39 @@
+<h1><%= @article.title %></h1>
+
+<p class='flash'><%= flash[:notice] %></p>
+
+<div class='article_actions'>
+  <%= edit_icon(@article, " Edit") %>
+  <%= delete_icon(@article, " Delete") %>
+  <%= link_to "Back to All Articles", articles_path  %>
+</div>
+
+<p><%= @article.body %></p>
+
+<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
+
+<h3><%= pluralize @article.comments.count, "Comment" %></h3>
+
+<% @article.comments.each do |comment| %>
+  <div class='comment'>
+    <p>
+      <em><%= comment.author_name %></em>
+      said at <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
+    </p>
+    <p><%= comment.body %></p>
+  </div>
+<% end %>
+
+<h4>Add Your Comment</h4>
+<%= form_for(@article.comments.new) do |f| %>
+    <p>
+        <%= f.label :author_name %><br/>
+        <%= f.text_field :author_name %>
+    </p>
+    <p>
+        <%= f.label :body %><br/>
+        <%= f.text_area :body %>
+    </p>
+    <%= f.hidden_field :article_id%>
+    <%= f.submit "Save" %>
+<% end %>
