@@ -33,5 +33,11 @@ describe DashboardController do
       get :show
       assigns(:article_word_count).should eq(150)
     end
+
+    it "assigns @comment_word_count" do
+      Comment.should_receive(:total_word_count).and_return(150)
+      get :show
+      assigns(:comment_word_count).should eq(150)
+    end
   end
 end
