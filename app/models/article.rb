@@ -38,6 +38,6 @@ class Article < ActiveRecord::Base
   end
 
   def self.for_dashboard
-    Article.order('created_at DESC').limit(5).all
+    order('created_at DESC').limit(5).all
   end
 end

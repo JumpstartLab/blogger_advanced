@@ -4,6 +4,6 @@ class Comment < ActiveRecord::Base
   validates :article_id, :presence => true
 
   def self.for_dashboard
-    Comment.order('created_at DESC').limit(5).all
+    order('created_at DESC').limit(5).all
   end
 end
