@@ -22,4 +22,16 @@ describe Comment do
     @comment.should_not be_valid
   end
 
+  context ".for_dashboard" do
+    it "gives the most recent 5 comments" do
+      6.times do
+        Fabricate(:comment)
+      end
+      expected = Comment.order('created_at DESC').limit(5).all
+
+      comments = Comment.for_dashboard
+      comments.count.should eq(5)
+      comments.should eq(expected)
+    end
+  end
 end

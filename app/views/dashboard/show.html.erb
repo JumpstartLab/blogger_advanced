@@ -6,3 +6,10 @@
     <li class="article"><%= article.title %></li>
   <% end %>
 </ul>
+
+<h2>Comments:</h2>
+<ul>
+  <% @comments.each do |comment| %>
+    <li class="comment"><%= comment.created_at %></li>
+  <% end %>
+</ul>

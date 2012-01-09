@@ -29,7 +29,18 @@ describe "front dashboard" do
   end
 
   context "recent comments" do
-    it "lists the five most recent comments"
+    before :each do
+      6.times do
+        Fabricate(:comment)
+      end
+
+      visit "/"
+    end
+
+    it "lists the five most recent comments" do
+      page.should have_content("Comments:")
+      all(".comment").count.should eq(5)
+    end
 
     it "lists them in reverse order"
   end
