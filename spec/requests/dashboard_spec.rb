@@ -21,8 +21,11 @@ describe "front dashboard" do
       all(".article").count.should eq(5)
     end
 
-  	it "lists them in reverse chronological order"
-
+  	it "lists them in reverse chronological order" do
+      recent_titles = Article.for_dashboard.map(&:title).map{|t| Regexp.quote(t) }
+      title_regex = Regexp.new(recent_titles.join(".*?"), Regexp::MULTILINE)
+      page.html.should match(title_regex)
+    end
   end
 
   context "recent comments" do
