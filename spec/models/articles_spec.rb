@@ -19,7 +19,7 @@ describe Article do
 
   it "must have a unique title" do
     article.save
-    second = article.clone
+    second = article.dup
     second.should_not be_valid
   end
   
