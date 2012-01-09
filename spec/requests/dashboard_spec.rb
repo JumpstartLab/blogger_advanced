@@ -42,7 +42,11 @@ describe "front dashboard" do
       all(".comment").count.should eq(5)
     end
 
-    it "lists them in reverse order"
+    it "lists them in reverse order" do
+      recent_bodies = Comment.for_dashboard.map(&:body).map{|t| Regexp.quote(t) }
+      body_regex = Regexp.new(recent_bodies.join(".*?"), Regexp::MULTILINE)
+      page.html.should match(body_regex)
+    end
   end
 
   context "statistics" do

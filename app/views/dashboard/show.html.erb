@@ -10,6 +10,6 @@
 <h2>Comments:</h2>
 <ul>
   <% @comments.each do |comment| %>
-    <li class="comment"><%= comment.created_at %></li>
+    <li class="comment"><%= comment.body %></li>
   <% end %>
 </ul>
