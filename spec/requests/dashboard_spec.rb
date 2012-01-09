@@ -9,8 +9,8 @@ describe "front dashboard" do
 
   context "recent articles" do
     before :each do
-      6.times do
-        Fabricate(:article)
+      6.times do |i|
+        Fabricate(:article, :title => "Title #{i}")
       end
 
       visit "/"
@@ -22,16 +22,15 @@ describe "front dashboard" do
     end
 
   	it "lists them in reverse chronological order" do
-      titles = Article.for_dashboard.map(&:title)
-      titles_on_page = page.all('li.article').map(&:text)
-      titles_on_page.should eq(titles)
+      titles = page.all('li.article').map(&:text)
+      titles.should eq(["Title 5", "Title 4", "Title 3", "Title 2", "Title 1"])
     end
   end
 
   context "recent comments" do
     before :each do
-      6.times do
-        Fabricate(:comment)
+      6.times do |i|
+        Fabricate(:comment, :body => "Body #{i}")
       end
 
       visit "/"
@@ -43,9 +42,8 @@ describe "front dashboard" do
     end
 
     it "lists them in reverse order" do
-      bodies = Comment.for_dashboard.map(&:body)
-      bodies_on_page = page.all('li.comment').map(&:text)
-      bodies_on_page.should eq(bodies)
+      bodies = page.all('li.comment').map(&:text)
+      bodies.should eq(["Body 5", "Body 4", "Body 3", "Body 2", "Body 1"])
     end
   end
 
@@ -68,21 +66,19 @@ describe "front dashboard" do
 
 
     it "displays the total words of all articles" do
-      Fabricate(:article)
-      total_words = Article.total_word_count
+      Fabricate(:article, :body => "Four score and seven years...")
 
       visit "/"
 
-      page.should have_content("Total words: #{total_words}")
+      page.should have_content("Total words: 5")
     end
 
     it "displays the total words of all comments" do
-      Fabricate(:comment)
-      total_words = Comment.total_word_count
+      Fabricate(:comment, :body => "I think that...")
 
       visit "/"
 
-      page.should have_content("Total words: #{total_words}")
+      page.should have_content("Total words: 3")
     end
     it "displays the time since the most recent article"
     it "displays the time since the most recent comment"
