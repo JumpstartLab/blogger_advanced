@@ -22,9 +22,9 @@ describe "front dashboard" do
     end
 
   	it "lists them in reverse chronological order" do
-      recent_titles = Article.for_dashboard.map(&:title).map{|t| Regexp.quote(t) }
-      title_regex = Regexp.new(recent_titles.join(".*?"), Regexp::MULTILINE)
-      page.html.should match(title_regex)
+      titles = Article.for_dashboard.map(&:title)
+      titles_on_page = page.all('li.article').map(&:text)
+      titles_on_page.should eq(titles)
     end
   end
 
@@ -43,9 +43,9 @@ describe "front dashboard" do
     end
 
     it "lists them in reverse order" do
-      recent_bodies = Comment.for_dashboard.map(&:body).map{|t| Regexp.quote(t) }
-      body_regex = Regexp.new(recent_bodies.join(".*?"), Regexp::MULTILINE)
-      page.html.should match(body_regex)
+      bodies = Comment.for_dashboard.map(&:body)
+      bodies_on_page = page.all('li.comment').map(&:text)
+      bodies_on_page.should eq(bodies)
     end
   end
 
