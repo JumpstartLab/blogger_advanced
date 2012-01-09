@@ -47,7 +47,8 @@ describe Comment do
 
   context "#word_count" do
     it "gives the total number of words" do
-      @comment.word_count.should eq(@comment.body.split.count)
+      comment = Fabricate(:article, :body => "Four score and seven years ago...")
+      comment.word_count.should eq(6)
     end
   end
 end

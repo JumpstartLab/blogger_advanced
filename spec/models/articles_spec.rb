@@ -60,7 +60,8 @@ describe Article do
 
   context "#word_count" do
     it "gives the total number of words" do
-      article.word_count.should eq(article.body.split.count)
+      article = Fabricate(:article, :body => "Four score and seven years ago...")
+      article.word_count.should eq(6)
     end
   end
 end
