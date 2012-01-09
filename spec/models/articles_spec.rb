@@ -47,4 +47,20 @@ describe Article do
       articles.should eq(expected)
     end
   end
+
+  context ".total_word_count" do
+    it "gives the word count for all articles" do
+      2.times { Fabricate(:article) }
+
+      count = Article.all.inject(0) {|total, a| total += a.word_count }
+
+      Article.total_word_count.should eq(count)
+    end
+  end
+
+  context "#word_count" do
+    it "gives the total number of words" do
+      article.word_count.should eq(article.body.split.count)
+    end
+  end
 end

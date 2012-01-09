@@ -2,6 +2,7 @@
 
 <h2>Articles:</h2>
 <p>Total articles: <%= @article_count %></p>
+<p>Total words: <%= @article_word_count %></p>
 <ul>
   <% @articles.each do |article| %>
     <li class="article"><%= article.title %></li>

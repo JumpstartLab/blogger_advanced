@@ -67,7 +67,15 @@ describe "front dashboard" do
     end
 
 
-    it "displays the total words of all articles"
+    it "displays the total words of all articles" do
+      Fabricate(:article)
+      total_words = Article.total_word_count
+
+      visit "/"
+
+      page.should have_content("Total words: #{total_words}")
+    end
+
     it "displays the total words of all comments"
     it "displays the time since the most recent article"
     it "displays the time since the most recent comment"
