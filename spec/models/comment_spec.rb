@@ -1,25 +1,19 @@
 require 'spec_helper'
 
 describe Comment do
-  before(:each) do
-    @article = Article.create(:title => "Hello, World", 
-                              :body => "Sample Body.")
-    @comment = @article.comments.create(:author_name => "Daffy Duck",
-                                        :body => "My comment goes here.")
-  end
+  let(:comment) { Fabricate(:comment) }
 
   it "should be valid with valid attributes" do
-    @article.should be_valid
-    @comment.should be_valid
+    comment.should be_valid
   end
 
   it "should respond to article" do
-    @comment.should respond_to(:article)
+    comment.should respond_to(:article)
   end
 
   it "must have a value in article_id" do
-    @comment.article_id = nil
-    @comment.should_not be_valid
+    comment.article_id = nil
+    comment.should_not be_valid
   end
 
   context ".for_dashboard" do
@@ -39,7 +33,7 @@ describe Comment do
     it "gives the word count for all comments" do
       2.times { Fabricate(:comment, :body => "I think that...") }
 
-      Comment.total_word_count.should eq(10) # includes @comment from above
+      Comment.total_word_count.should eq(6)
     end
   end
 
