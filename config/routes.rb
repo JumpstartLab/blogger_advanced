@@ -1,6 +1,7 @@
 JsbloggerCodemash::Application.routes.draw do
   resources :articles
   resources :comments
+  resource  :dashboard
   
-  match '/' => 'articles#index'
+  match '/' => 'dashboard#show'
 end
