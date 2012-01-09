@@ -14,5 +14,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'faker'
-  gem 'fabrication'  
+  gem 'fabrication'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
 end
