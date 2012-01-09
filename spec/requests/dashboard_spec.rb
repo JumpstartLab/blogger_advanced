@@ -1,4 +1,4 @@
-
+require 'spec_helper'
 
 describe "front dashboard" do
 
@@ -8,7 +8,18 @@ describe "front dashboard" do
   end
 
   context "recent articles" do
-  	it "lists the five most recent articles"
+    before :each do
+      6.times do
+        Fabricate(:article)
+      end
+
+      visit "/"
+    end
+
+  	it "lists the five most recent articles" do
+      page.should have_content("Articles:")
+      all(".article").count.should eq(5)
+    end
 
   	it "lists them in reverse chronological order"
 

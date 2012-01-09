@@ -36,4 +36,8 @@ class Article < ActiveRecord::Base
       [tag.articles, tag]
     end
   end
+
+  def self.for_dashboard
+    Article.order('created_at DESC').limit(5).all
+  end
 end
