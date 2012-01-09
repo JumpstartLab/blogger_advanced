@@ -21,5 +21,11 @@ describe DashboardController do
       get :show
       assigns(:article_count).should eq(4)
     end
+
+    it "assigns @comment_count" do
+      Comment.should_receive(:count).and_return(4)
+      get :show
+      assigns(:comment_count).should eq(4)
+    end
   end
 end

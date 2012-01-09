@@ -9,6 +9,7 @@
 </ul>
 
 <h2>Comments:</h2>
+<p>Total comments: <%= @comment_count %></p>
 <ul>
   <% @comments.each do |comment| %>
     <li class="comment"><%= comment.body %></li>

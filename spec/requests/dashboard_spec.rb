@@ -57,7 +57,16 @@ describe "front dashboard" do
       visit "/"
       page.should have_content("Total articles: #{number_of_articles}")
     end
-    it "lists the total number of comments"
+
+    it "lists the total number of comments" do
+      number_of_comments = rand(10)
+      number_of_comments.times { Fabricate(:comment) }
+
+      visit "/"
+      page.should have_content("Total comments: #{number_of_comments}")
+    end
+
+
     it "displays the total words of all articles"
     it "displays the total words of all comments"
     it "displays the time since the most recent article"

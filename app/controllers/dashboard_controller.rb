@@ -4,5 +4,6 @@ class DashboardController < ApplicationController
     @article_count = Article.count
 
     @comments = Comment.for_dashboard
+    @comment_count = Comment.count
   end
 end
