@@ -50,11 +50,9 @@ describe Article do
 
   context ".total_word_count" do
     it "gives the word count for all articles" do
-      2.times { Fabricate(:article) }
+      2.times { Fabricate(:article, :body => "I think that...") }
 
-      count = Article.all.inject(0) {|total, a| total += a.word_count }
-
-      Article.total_word_count.should eq(count)
+      Article.total_word_count.should eq(6)
     end
   end
 

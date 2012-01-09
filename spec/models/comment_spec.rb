@@ -37,11 +37,9 @@ describe Comment do
 
   context ".total_word_count" do
     it "gives the word count for all comments" do
-      2.times { Fabricate(:comment) }
+      2.times { Fabricate(:comment, :body => "I think that...") }
 
-      count = Comment.all.inject(0) {|total, a| total += a.word_count }
-
-      Comment.total_word_count.should eq(count)
+      Comment.total_word_count.should eq(10) # includes @comment from above
     end
   end
 
