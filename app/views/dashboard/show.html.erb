@@ -1,6 +1,7 @@
 <h1>Dashboard</h1>
 
 <h2>Articles:</h2>
+<p>Total articles: <%= @article_count %></p>
 <ul>
   <% @articles.each do |article| %>
     <li class="article"><%= article.title %></li>

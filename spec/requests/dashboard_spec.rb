@@ -50,7 +50,13 @@ describe "front dashboard" do
   end
 
   context "statistics" do
-    it "lists the total number of articles"
+    it "lists the total number of articles" do
+      number_of_articles = rand(10)
+      number_of_articles.times { Fabricate(:article) }
+
+      visit "/"
+      page.should have_content("Total articles: #{number_of_articles}")
+    end
     it "lists the total number of comments"
     it "displays the total words of all articles"
     it "displays the total words of all comments"
