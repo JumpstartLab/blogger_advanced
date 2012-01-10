@@ -1,1 +1,19 @@
 <h1>Dashboard</h1>
+
+<h2>Articles:</h2>
+<p>Total articles: <%= @article_count %></p>
+<p>Total words: <%= @article_word_count %></p>
+<ul>
+  <% @articles.each do |article| %>
+    <li class="article"><%= article.title %></li>
+  <% end %>
+</ul>
+
+<h2>Comments:</h2>
+<p>Total comments: <%= @comment_count %></p>
+<p>Total words: <%= @comment_word_count %></p>
+<ul>
+  <% @comments.each do |comment| %>
+    <li class="comment"><%= comment.body %></li>
+  <% end %>
+</ul>

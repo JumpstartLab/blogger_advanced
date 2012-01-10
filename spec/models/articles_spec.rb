@@ -34,4 +34,32 @@ describe Article do
   it "responds to .valid_ids with a set of all current article IDs" do
     Article.valid_ids.should == Article.select(:id).collect{|a| a.id}
   end
+
+  context ".for_dashboard" do
+    it "gives the most recent 5 articles" do
+      6.times do
+        Fabricate(:article)
+      end
+      expected = Article.order('created_at DESC').limit(5).all
+
+      articles = Article.for_dashboard
+      articles.count.should eq(5)
+      articles.should eq(expected)
+    end
+  end
+
+  context ".total_word_count" do
+    it "gives the word count for all articles" do
+      2.times { Fabricate(:article, :body => "I think that...") }
+
+      Article.total_word_count.should eq(6)
+    end
+  end
+
+  context "#word_count" do
+    it "gives the total number of words" do
+      article = Fabricate(:article, :body => "Four score and seven years ago...")
+      article.word_count.should eq(6)
+    end
+  end
 end
