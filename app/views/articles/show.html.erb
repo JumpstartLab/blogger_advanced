@@ -1,16 +1,15 @@
 <h1><%= @article.title %></h1>
+<h4>Published <%= @article.created_at %>
+<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
 
-<p class='flash'><%= flash[:notice] %></p>
+<p><%= @article.body %></p>
+
 
 <div class='article_actions'>
   <%= edit_icon(@article, " Edit") %>
   <%= delete_icon(@article, " Delete") %>
   <%= link_to "Back to All Articles", articles_path  %>
 </div>
-
-<p><%= @article.body %></p>
-
-<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
 
 <h3><%= pluralize @article.comments.count, "Comment" %></h3>
 
