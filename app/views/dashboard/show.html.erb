@@ -1,19 +1,42 @@
-<h1>Dashboard</h1>
+<h1>JSBlogger Dashboard</h1>
 
-<h2>Articles:</h2>
-<p>Total articles: <%= @article_count %></p>
-<p>Total words: <%= @article_word_count %></p>
-<ul>
-  <% @articles.each do |article| %>
-    <li class="article"><%= article.title %></li>
-  <% end %>
-</ul>
+<p>
+  <%= link_to "See All Articles", articles_path %>
+</p>
+<div class='dashboard_block'>
+  <h2>Most Recent Articles</h2>
+  <ul>
+    <% @articles.each do |article| %>
+      <li class="article"><%= link_to article.title, article %> published <%= article.created_at %></li>
+    <% end %>
+  </ul>
+</div>
 
-<h2>Comments:</h2>
-<p>Total comments: <%= @comment_count %></p>
-<p>Total words: <%= @comment_word_count %></p>
-<ul>
-  <% @comments.each do |comment| %>
-    <li class="comment"><%= comment.body %></li>
-  <% end %>
-</ul>
+<div class='dashboard_block'>
+  <h2>Most Recent Comments</h2>
+  <ul>
+    <% @comments.each do |comment| %>
+      <li class="comment">
+      	<%= comment.author_name %>
+      	said
+      	"<%= comment.body %>"
+      	in response to
+      	<%= link_to comment.article.title, comment.article %>
+      	at
+      	<%= comment.created_at %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="dashboard_block" id='statistics'>
+  <h2>Site-Wide Statistics</h2>
+  <ul>
+  	<li id='total_articles'>Total articles: <%= @article_count %></li>
+  	<li id='total_comments'>Total comments: <%= @comment_count %></li>
+  	<li id='total_article_words'>Words in all articles: <%= @article_word_count %></li>
+  	<li id='total_comment_words'>Words in all comments: <%= @comment_word_count %></li>
+  	<li id='total_words'>Total Words: <%= @article_word_count + @comment_word_count %></li>
+  	<li id='most_popular'>Most Popular Article: <%= @most_popular_article %></li>
+  </ul>
+</div>
