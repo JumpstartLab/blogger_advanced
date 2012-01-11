@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
   def create
-    a = Article.find(params[:comment][:article_id])
-    c = a.comments.new(params[:comment])
-    c.save
+    article = Article.find(params[:comment][:article_id])
+    comment = article.comments.create(params[:comment])
     flash[:notice] = "Your comment was added."
-    redirect_to article_path(a)
+    redirect_to article_path(article)
   end
 end

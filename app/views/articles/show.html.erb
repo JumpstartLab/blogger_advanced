@@ -17,7 +17,7 @@
   <div class='comment'>
     <p>
       <em><%= comment.author_name %></em>
-      said at <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
+      said <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
     </p>
     <p><%= comment.body %></p>
   </div>

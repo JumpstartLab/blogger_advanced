@@ -41,7 +41,6 @@ describe Article do
         Fabricate(:article)
       end
       expected = Article.order('created_at DESC').limit(5).all
-
       articles = Article.for_dashboard
       articles.count.should eq(5)
       articles.should eq(expected)
@@ -60,6 +59,32 @@ describe Article do
     it "gives the total number of words" do
       article = Fabricate(:article, :body => "Four score and seven years ago...")
       article.word_count.should eq(6)
+    end
+  end
+
+  context ".search_by_tag_name" do
+    context "when given no parameter" do
+      it "should return all the articles" do
+        articles, tag = Article.search_by_tag_name(nil)
+        articles.should == Article.all
+      end
+    end
+
+    context "when given a tag name" do
+      context "and the tag exists" do
+        it "should return the articles associated with that tag and the tag" do
+          tag = Fabricate(:tag)
+          tag.articles = [Fabricate(:article), Fabricate(:article)]
+          Article.search_by_tag_name(tag.name).should == [tag.articles, tag]
+        end
+      end
+
+      context "but the tag does not exist" do
+        it "should return an empty list of articles and no tag" do
+          bad_name = Fabricate(:tag).name + "_no_exist"
+          Article.search_by_tag_name(bad_name).should == [[], nil]
+        end
+      end
     end
   end
 end
