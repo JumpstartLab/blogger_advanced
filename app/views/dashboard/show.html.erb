@@ -37,6 +37,6 @@
   	<li id='total_article_words'>Words in all articles: <%= @article_word_count %></li>
   	<li id='total_comment_words'>Words in all comments: <%= @comment_word_count %></li>
   	<li id='total_words'>Total Words: <%= @article_word_count + @comment_word_count %></li>
-  	<li id='most_popular'>Most Popular Article: <%= @most_popular_article %></li>
+  	<li id='most_popular'>Most Popular Article: <%= link_to @most_popular_article.title, @most_popular_article %></li>
   </ul>
 </div>
