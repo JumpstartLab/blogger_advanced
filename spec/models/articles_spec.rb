@@ -62,6 +62,16 @@ describe Article do
     end
   end
 
+  context ".most_popular" do
+    it "returns the article with the most comments" do
+      articles = (0..5).collect{ Fabricate(:article) }
+      Comment.destroy_all      
+      target = articles[rand(articles.length)]
+      Fabricate(:comment, :article => target)
+      Article.most_popular.should == target
+    end
+  end
+
   context ".search_by_tag_name" do
     context "when given no parameter" do
       it "should return all the articles" do

@@ -14,6 +14,10 @@ class Article < ActiveRecord::Base
      tags.collect{|t| t.name}.join(", ")
   end
 
+  def self.most_popular
+    Article.all.sort_by{|a| a.comments.count}.last
+  end
+
   def tag_list=(input)
     #self.tags = []
     names = input.split(",").collect{|text| text.strip.downcase}
