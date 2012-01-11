@@ -1,3 +1,3 @@
 Fabricator(:tag) do
-  name { [Faker::Lorem.words(1), sequence].join }
+  name { "tag_#{sequence}" }
 end
