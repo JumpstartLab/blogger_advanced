@@ -17,5 +17,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'rb-fsevent'
+  #gem 'rb-fsevent'
+  gem 'database_cleaner'
+  gem 'launchy'
 end
