@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.most_popular
-    Article.all.sort_by{|a| a.comments.count}.last
+    Article.all.sort_by{|a| a.comments.size}.last
   end
 
   def tag_list=(input)
