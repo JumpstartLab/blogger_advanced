@@ -6,6 +6,8 @@ class Article < ActiveRecord::Base
   has_many :taggings
   has_many :tags, :through => :taggings
 
+  default_scope :include => [:comments, :tags]
+
   def to_s
     return title
   end
@@ -15,7 +17,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.most_popular
-    Article.all.sort_by{|a| a.comments.size}.last
+    all.sort_by{|a| a.comments.count }.last
   end
 
   def tag_list=(input)
@@ -60,7 +62,7 @@ class Article < ActiveRecord::Base
       article.created_at = article.created_at - (rand(300) + 100).hours
       article.tags = tags.sort_by{ rand }[0..rand(tags.length)]
       article.save
-      (rand(10)).times do
+      (rand(10) + 1).times do
       	Fabricate(:comment, :article => article, :created_at => article.created_at + rand(100).hours)
       end
       yield if block_given?
