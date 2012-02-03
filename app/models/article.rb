@@ -52,4 +52,18 @@ class Article < ActiveRecord::Base
   def self.total_word_count
     all.inject(0) {|total, a| total += a.word_count }
   end
+  
+  def self.generate_samples(quantity = 1000)
+    tags = Tag.all
+    quantity.times do
+      article = Fabricate(:article)
+      article.created_at = article.created_at - (rand(300) + 100).hours
+      article.tags = tags.sort_by{ rand }[0..rand(tags.length)]
+      article.save
+      (rand(10)).times do
+      	Fabricate(:comment, :article => article, :created_at => article.created_at + rand(100).hours)
+      end
+      yield if block_given?
+    end
+  end
 end

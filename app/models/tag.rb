@@ -5,4 +5,8 @@ class Tag < ActiveRecord::Base
   def to_s
     name
   end
+  
+  def self.generate_samples(quantity = 10)
+    quantity.times{ Fabricate(:tag) }
+  end
 end
