@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
-#gem 'rails', '3.2.1'
-gem 'rails', :git => 'https://github.com/rails/rails.git', :branch => "3-2-stable"
+gem 'rails', '~> 3.2.1'
 gem 'sqlite3'
 gem 'jquery-rails'
 
