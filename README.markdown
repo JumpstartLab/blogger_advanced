@@ -1,4 +1,4 @@
-# JSBlogger Advanced
+# Blogger Advanced
 
 This is a sample project for use with the tutorials at http://tutorials.jumpstartlab.com
 
