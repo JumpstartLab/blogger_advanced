@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.1'
+gem 'rails', '~> 3.2.13'
 gem 'sqlite3'
 gem 'jquery-rails'
 
@@ -14,7 +14,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'faker'
-  gem 'fabrication'
+  gem 'fabrication', "~> 2.2.2"
   gem 'guard'
   gem 'guard-rspec'
   #gem 'rb-fsevent'
