@@ -5,4 +5,7 @@ class AccountsController < ApplicationController
   def show
   end
 
+  def work
+  end
+
 end
