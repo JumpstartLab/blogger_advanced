@@ -6,5 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Author.generate_samples(10)
 Tag.generate_samples(10)
 Article.generate_samples(10)
