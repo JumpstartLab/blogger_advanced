@@ -17,3 +17,18 @@
   <dt>Twitter Username</dt>
   <dd>@<%= current_author.twitter %></dd>
 </dl>
+
+<h2>Your articles</h2>
+<ul>
+<% current_author.articles.each do |article| %>
+  <li>
+    <h3><%= article.title %></h3>
+    <h4><%= article.comments.count %> Comments:</h4>
+    <ul>
+      <% article.comments.each do |comment| %>
+	<li><p><%= comment.body %></p></li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
