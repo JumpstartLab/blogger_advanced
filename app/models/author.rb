@@ -4,4 +4,8 @@ class Author < ActiveRecord::Base
   def self.generate_samples(count)
     count.times { Fabricate(:author) }
   end
+
+  def self.random
+    order('RANDOM()').limit(1).first
+  end
 end
