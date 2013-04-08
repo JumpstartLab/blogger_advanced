@@ -17,10 +17,6 @@ class Article < ActiveRecord::Base
      tags.collect{|t| t.name}.join(", ")
   end
 
-  def self.most_popular
-    all.sort_by{|a| a.comments.count }.last
-  end
-
   def tag_list=(input)
     #self.tags = []
     names = input.split(",").collect{|text| text.strip.downcase}
@@ -29,6 +25,14 @@ class Article < ActiveRecord::Base
       self.tags << tag unless self.tags.include?(tag)
     end
     self.tags = self.tags.select{|tag| names.include?(tag.name)}
+  end
+
+  def self.most_popular
+    all.sort_by{|a| a.comments.count }.last
+  end
+
+  def self.random
+    order('RANDOM()').limit(1).first
   end
 
   def self.valid_ids
@@ -55,7 +59,7 @@ class Article < ActiveRecord::Base
   def self.total_word_count
     all.inject(0) {|total, a| total += a.word_count }
   end
-  
+
   def self.generate_samples(quantity = 1000)
     tags = Tag.all
     quantity.times do
@@ -63,7 +67,7 @@ class Article < ActiveRecord::Base
       article.created_at = article.created_at - (rand(300) + 100).hours
       article.tags = tags.sort_by{ rand }[0..rand(tags.length)]
       article.save
-      (rand(10) + 1).times do
+      rand(2..15).times do
       	Fabricate(:comment, :article => article, :created_at => article.created_at + rand(100).hours)
       end
       yield if block_given?
