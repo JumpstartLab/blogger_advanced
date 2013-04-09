@@ -2,13 +2,13 @@ JsbloggerCodemash::Application.routes.draw do
   resources :articles
   resources :comments
   resource  :dashboard
-  resource  :account, :only => [:show] do
-    get :work
-  end
 
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
+  resources :authors
 
-  root to: 'dashboard#show'
+  resources :sessions, only: [ :new, :create, :destroy ]
+
+  match 'login'  => 'sessions#new'
+  match 'logout' => 'sessions#destroy'
+
+  root to: 'articles#index'
 end

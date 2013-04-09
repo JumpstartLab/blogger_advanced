@@ -1,5 +1,9 @@
 class Author < ActiveRecord::Base
-  attr_accessible :email, :name, :phone_number, :twitter, :website
+  authenticates_with_sorcery!
+
+  attr_accessible :email, :name, :username, :phone_number, :twitter, :website
+
+  validates_confirmation_of :password, message: "should match confirmation", if: :password
 
   has_many :articles
 
@@ -13,4 +17,5 @@ class Author < ActiveRecord::Base
   def self.random
     order('RANDOM()').limit(1).first
   end
+
 end

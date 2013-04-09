@@ -1,6 +1,6 @@
 <h1><%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %></h1>
 
-<%= link_to "New Article", new_article_path, :class => 'new_article' %>
+<%= link_to("New Article", new_article_path, :class => 'new_article') if current_user %>
 
 <div id="sidebar">
   Filter by Tag: <%= tag_links(Tag.all) %>

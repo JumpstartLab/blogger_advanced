@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+
+  before_filter :require_login, except: [ :show, :index ]
+
   def show
     @article = Article.find(params[:id])
   end

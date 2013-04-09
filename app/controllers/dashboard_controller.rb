@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+
+  before_filter :require_login
+
   def show
     @articles = Article.for_dashboard
     @article_count = Article.count

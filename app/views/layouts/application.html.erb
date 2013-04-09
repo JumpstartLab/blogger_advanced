@@ -9,8 +9,22 @@
 <body>
 
 <p class='flash'><%= flash[:notice] %></p>
+  <div id="container">
+    <div id="content">
+      <%= yield %>
+      <hr/>
+      <h6>
+        <%= link_to 'Home', root_path %>
+        <% if logged_in? %>
+          <%= "| Logged in as #{current_user.username}" %>
+          <%= link_to "logout", logout_path, class: 'login' %>
+        <% else %>
+          <%= link_to "login", login_path, class: 'login' %>
+        <% end %>
 
-<%= yield %>
+      </h6>
+    </div>
+  </div>
 
 </body>
 </html>
