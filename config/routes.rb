@@ -1,7 +1,7 @@
 JsbloggerCodemash::Application.routes.draw do
   resources :articles
   resources :comments
-  resource  :dashboard
+  resource  :dashboard, controller: "dashboard"
 
   resources :authors
 

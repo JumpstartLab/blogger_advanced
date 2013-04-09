@@ -14,7 +14,7 @@
       <%= yield %>
       <hr/>
       <h6>
-        <%= link_to 'Home', root_path %>
+        <%= link_to 'Home', root_path %> | <%= link_to 'Dashboard', dashboard_path %>
         <% if logged_in? %>
           <%= "| Logged in as #{current_user.username}" %>
           <%= link_to "logout", logout_path, class: 'login' %>
