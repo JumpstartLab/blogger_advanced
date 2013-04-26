@@ -1,6 +1,8 @@
 class Comment < ActiveRecord::Base
   belongs_to :article
 
+  include InvalidatesCache
+
   validates :article_id, :presence => true
 
   def self.for_dashboard
