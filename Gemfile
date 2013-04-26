@@ -21,3 +21,5 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
 end
+
+gem 'redis-rails'

@@ -29,4 +29,6 @@ JsbloggerCodemash::Application.configure do
   config.assets.debug = true
   
   config.active_record.auto_explain_threshold_in_seconds = 0.2
+
+  config.cache_store = :redis_store, "redis://localhost:6379/1/ns"
 end
