@@ -28,7 +28,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.most_popular
-    all.sort_by{|a| a.comments.count }.last
+    @most_popular ||= all.sort_by{|a| a.comments.count }.last
   end
 
   def self.random
@@ -57,7 +57,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.total_word_count
-    all.inject(0) {|total, a| total += a.word_count }
+    @total_word_count ||= all.inject(0) {|total, a| total += a.word_count }
   end
 
   def self.generate_samples(quantity = 1000)
