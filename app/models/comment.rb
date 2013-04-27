@@ -1,7 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :article
-
-  include InvalidatesCache
+  belongs_to :article, :touch => true
 
   validates :article_id, :presence => true
 

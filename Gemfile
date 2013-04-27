@@ -23,3 +23,4 @@ group :development, :test do
 end
 
 gem 'redis-rails'
+gem 'cache_digests'

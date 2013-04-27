@@ -1,38 +1,40 @@
-<h1><%= @article.title %></h1>
-<h4>Published <%= @article.created_at %></h4>
-<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
+<% cache @article do %>
+  <h1><%= @article.title %></h1>
+  <h4>Published <%= @article.created_at %></h4>
+  <p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
 
-<p><%= @article.body %></p>
+  <p><%= @article.body %></p>
 
 
-<div class='article_actions'>
-  <%= edit_icon(@article, "Edit") %>
-  <%= delete_icon(@article, "Delete") %>
-  <%= link_to "Back to All Articles", articles_path  %>
-</div>
-
-<h3><%= pluralize @article.comments.count, "Comment" %></h3>
-
-<% @article.comments.each do |comment| %>
-  <div class='comment'>
-    <p>
-      <em><%= comment.author_name %></em>
-      said <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
-    </p>
-    <p><%= comment.body %></p>
+  <div class='article_actions'>
+    <%= edit_icon(@article, "Edit") %>
+    <%= delete_icon(@article, "Delete") %>
+    <%= link_to "Back to All Articles", articles_path  %>
   </div>
-<% end %>
 
-<h4>Add Your Comment</h4>
-<%= form_for(@article.comments.new) do |f| %>
-    <p>
-        <%= f.label :author_name %><br/>
-        <%= f.text_field :author_name %>
-    </p>
-    <p>
-        <%= f.label :body %><br/>
-        <%= f.text_area :body %>
-    </p>
-    <%= f.hidden_field :article_id%>
-    <%= f.submit "Save" %>
+  <h3><%= pluralize @article.comments.count, "Comment" %></h3>
+
+  <% @article.comments.each do |comment| %>
+    <div class='comment'>
+      <p>
+        <em><%= comment.author_name %></em>
+        said <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
+      </p>
+      <p><%= comment.body %></p>
+    </div>
+  <% end %>
+
+  <h4>Add Your Comment</h4>
+  <%= form_for(@article.comments.new) do |f| %>
+      <p>
+          <%= f.label :author_name %><br/>
+          <%= f.text_field :author_name %>
+      </p>
+      <p>
+          <%= f.label :body %><br/>
+          <%= f.text_area :body %>
+      </p>
+      <%= f.hidden_field :article_id%>
+      <%= f.submit "Save" %>
+  <% end %>
 <% end %>

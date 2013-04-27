@@ -2,12 +2,10 @@ class Article < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
   validates :body, :presence => true
 
-  belongs_to :author
+  belongs_to :author, :touch => true
   has_many :comments
   has_many :taggings
   has_many :tags, :through => :taggings
-
-  include InvalidatesCache
 
   #default_scope :include => [:comments, :tags]
 

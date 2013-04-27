@@ -9,13 +9,15 @@
 <ul id="articles">
   <% @articles.each do |article| %>
     <li>
-      <%= link_to article.title, article_path(article) %>
-      <span class='tag_list'><%= article.tag_list %></span>
-      <span class='actions'>
-        <%= edit_icon(article) %>
-        <%= delete_icon(article) %>
-      </span>
-      <%= pluralize article.comments.count, "Comment" %>
+      <% cache article do %>
+        <%= link_to article.title, article_path(article) %>
+        <span class='tag_list'><%= article.tag_list %></span>
+        <span class='actions'>
+          <%= edit_icon(article) %>
+          <%= delete_icon(article) %>
+        </span>
+        <%= pluralize article.comments.count, "Comment" %>
+      <% end %>
     </li>
   <% end %>
 </ul>
