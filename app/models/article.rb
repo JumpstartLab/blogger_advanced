@@ -9,6 +9,10 @@ class Article < ActiveRecord::Base
 
   #default_scope :include => [:comments, :tags]
 
+  def all_comments
+    Comment.all_for_article_id(self.id)
+  end
+
   def to_s
     return title
   end

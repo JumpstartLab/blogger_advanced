@@ -14,7 +14,7 @@
 <h3><%= pluralize @article.comments.count, "Comment" %></h3>
 
 <div id='comments'>
-  <% @article.comments.each do |comment| %>
+  <% @comments.each do |comment| %>
     <div class='comment'>
       <p>
         <em><%= comment.author_name %></em>
