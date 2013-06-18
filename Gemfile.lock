@@ -116,6 +116,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (2.2.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -176,6 +177,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   rails (~> 3.2.13)
+  redis
   rspec-rails
   sass-rails
   sqlite3
