@@ -1,1 +1,7 @@
-<%= button_to 'Log me in!', login_path, {:method => :post} %>
+<%= form_for :session do |f| %>
+
+  <%= f.label :login_name, 'Login As' %>
+  <%= f.text_field :login_name %>
+  <%= f.submit 'Login' %>
+
+<% end %>

@@ -4,8 +4,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    session[:author_id] = Author.random.id
-    redirect_to work_account_path, :notice => "Logged in as #{current_author.name}"
+    author = Author.find_or_create_by_name(params[:session][:login_name].downcase)
+    session[:author_id] = author.id
+    redirect_to articles_path, :notice => "Logged in as #{current_author.name}"
   end
 
   def destroy
