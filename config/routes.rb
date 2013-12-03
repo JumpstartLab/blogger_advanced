@@ -1,5 +1,13 @@
 JsbloggerCodemash::Application.routes.draw do
-  resources :articles
+  scope ':username' do
+    resources :articles, :only => [:show, :index]
+
+    namespace :admin do
+      resources :articles, :except => [:show, :index]
+    end
+    #resources :articles, :except => [:show, :index], :to => "admin/articles"
+  end
+  
   resources :comments
   resource  :dashboard
   resource  :account, :only => [:show]
@@ -10,3 +18,5 @@ JsbloggerCodemash::Application.routes.draw do
 
   root to: 'dashboard#show'
 end
+
+#scope ':user'

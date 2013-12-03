@@ -2,7 +2,7 @@ module IconsHelper
   def edit_icon(object, link_text = nil)
     edit_icon_filename = 'page_edit.png'
     link_to image_tag(edit_icon_filename) + " " + link_text,
-            edit_polymorphic_path(object)
+            edit_polymorphic_path(object, :username => current_author.name)
   end
 
   def delete_icon(object, link_text = nil)

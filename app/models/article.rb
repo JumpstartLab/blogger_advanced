@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
   validates :body, :presence => true
+  validates :author, :presence => true
 
   belongs_to :author
   has_many :comments
@@ -8,6 +9,10 @@ class Article < ActiveRecord::Base
   has_many :tags, :through => :taggings
 
   #default_scope :include => [:comments, :tags]
+
+  def self.by_author(username)
+    Author.find_by_name(username).articles
+  end
 
   def to_s
     return title

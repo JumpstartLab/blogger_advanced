@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def my_articles
+    current_author.articles
+  end
+
 end

@@ -1,6 +1,6 @@
 <h1><%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %></h1>
 
-<%= link_to "New Article", new_article_path, :class => 'new_article' %>
+<%= link_to "New Article", new_admin_article_path, :class => 'new_article' %>
 
 <div id="sidebar">
   Filter by Tag: <%= tag_links(Tag.all) %>
@@ -9,11 +9,10 @@
 <ul id="articles">
   <% @articles.each do |article| %>
     <li>
-      <%= link_to article.title, article_path(article) %>
+      <%= link_to_article(article) %>
       <span class='tag_list'><%= article.tag_list %></span>
       <span class='actions'>
-        <%= edit_icon(article) %>
-        <%= delete_icon(article) %>
+      
       </span>
       <%= pluralize article.comments.count, "Comment" %>
     </li>
