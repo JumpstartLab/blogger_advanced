@@ -8,7 +8,7 @@
 
 <ul id="articles">
   <% @articles.each do |article| %>
-    <li>
+    <li id='article_<%= article.id %>'>
       <%= link_to article.title, article_path(article) %>
       <span class='tag_list'><%= article.tag_list %></span>
       <span class='actions'>

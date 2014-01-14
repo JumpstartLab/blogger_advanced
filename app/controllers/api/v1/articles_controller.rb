@@ -2,7 +2,7 @@ module Api
   module V1
     class ArticlesController < Controller
       def index
-        respond_with Article.limit(5).as_json(:except => :body)
+        respond_with Article.limit(5).order("created_at DESC").as_json(:except => :body)
       end
 
       def show
