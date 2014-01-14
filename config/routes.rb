@@ -4,6 +4,10 @@ JsbloggerCodemash::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :articles, :only => [:index, :show, :create, :update, :destroy] do
+        collection do
+          get :count
+        end
+
         member do
           get :with_comments
         end

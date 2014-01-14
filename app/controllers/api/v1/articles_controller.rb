@@ -19,6 +19,10 @@ module Api
           render :status => 406
         end
       end
+
+      def count
+        render :json => Article.count
+      end
     end
   end
 end

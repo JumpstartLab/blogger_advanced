@@ -1,4 +1,7 @@
-<h1><%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %></h1>
+<h1>
+  <%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %>
+  <span id="articles-count"></span>
+</h1>
 
 <%= link_to "New Article", new_article_path, :class => 'new_article' %>
 
