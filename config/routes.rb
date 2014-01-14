@@ -1,5 +1,23 @@
 JsbloggerCodemash::Application.routes.draw do
+  resources :reviews
+
+  namespace :api do
+    namespace :v1 do
+      resources :articles, :only => [:index, :show, :create, :update, :destroy] do
+        member do
+          get :with_comments
+        end
+      end
+      resources :comments
+    end
+
+    namespace :v2 do
+      resources :articles
+    end
+  end
+
   resources :articles
+
   resources :comments
   resource  :dashboard
   resource  :account, :only => [:show] do

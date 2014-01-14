@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
+  respond_to :json, :html
+
   def show
     @article = Article.find(params[:id])
+    respond_with @article
   end
 
   def index
@@ -15,10 +18,10 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     if @article.save
       flash[:notice] = "Article was created."
-      redirect_to articles_path
+      redirect_to @article
     else
       render :new
-    end
+    end      
   end
 
   def edit
