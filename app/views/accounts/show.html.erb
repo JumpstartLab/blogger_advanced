@@ -1,5 +1,8 @@
 <h1><%= current_author.name %></h1>
 
+<%= link_to "New Article", new_article_path, :class => 'new_article' %>
+
+
 <h2>Your articles</h2>
 <ul>
 <% current_author.articles.each do |article| %>

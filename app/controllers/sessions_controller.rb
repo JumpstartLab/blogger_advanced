@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   def create
     session[:author_id] = Author.random.id
-    redirect_to work_account_path, :notice => "Logged in as #{current_author.name}"
+    redirect_to account_path, :notice => "Logged in as #{current_author.name}"
   end
 
   def destroy
