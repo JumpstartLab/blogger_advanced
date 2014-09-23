@@ -21,3 +21,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
 end
+
+group :staging do
+  gem 'faker'
+  gem 'fabrication', "~> 2.2.2"
+end

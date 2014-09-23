@@ -1,4 +1,6 @@
 JsbloggerCodemash::Application.routes.draw do
+  match ':status', to: 'errors#show', constraints: {status: /\d{3}/}
+
   resources :articles
   resources :comments
   resource  :dashboard

@@ -1,6 +1,11 @@
 class ArticlesController < ApplicationController
   def show
-    @article = Article.find(params[:id])
+    begin
+      @article = Article.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "Article was not found, please try again."
+      redirect_to articles_path
+    end
   end
 
   def index
