@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
+    @article = Article.new(article_params)
     if @article.save
       flash[:notice] = "Article was created."
       redirect_to articles_path
@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find params[:id]
-    if @article.update_attributes(params[:article])
+    if @article.update_attributes(article_params)
       flash[:notice] = "Article was updated."
       redirect_to article_path(@article)
     else
@@ -41,4 +41,11 @@ class ArticlesController < ApplicationController
     flash[:notice] = "#{article} was destroyed."
     redirect_to articles_path
   end
+  
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :body, :author_id)
+  end
+  
 end

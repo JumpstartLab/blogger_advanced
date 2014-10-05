@@ -11,10 +11,5 @@ class Author < ActiveRecord::Base
   def self.random
     order('RANDOM()').limit(1).first
   end
-  
-  private
-  
-  def person_params
-    params.require(:person).permit(:email, :name, :phone_number, :twitter, :website)
-  end
+
 end
