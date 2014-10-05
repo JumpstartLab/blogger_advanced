@@ -41,7 +41,7 @@ class Article < ActiveRecord::Base
 
   def self.search_by_tag_name(tag_name)
     if tag_name.blank?
-      [Article.scoped, nil]
+      [Article.all, nil]
     else
       tag = Tag.find_by_name(tag_name)
       tag ? [tag.articles, tag] : [[], nil]
