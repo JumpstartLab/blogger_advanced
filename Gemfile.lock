@@ -67,6 +67,9 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.6.11)
+    jbuilder (2.2.0)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -174,6 +177,7 @@ DEPENDENCIES
   faker
   guard
   guard-rspec
+  jbuilder
   jquery-rails
   launchy
   rails (~> 4.1.6)
