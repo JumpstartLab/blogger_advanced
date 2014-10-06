@@ -1,1 +1,1 @@
-json.title @article.title
+json.(@article, :title, :body)
