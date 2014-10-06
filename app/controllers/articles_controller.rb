@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles, @tag = Article.search_by_tag_name(params[:tag])
+    respond_with [@articles, { tag: @tag }]
   end
 
   def new
