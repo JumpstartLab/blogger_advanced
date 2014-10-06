@@ -12,6 +12,10 @@ class Article < ActiveRecord::Base
   def to_s
     return title
   end
+  
+  def as_json(options={})
+    super(:methods => [:tag_list], except: [:created_at, :updated_at, :author_id])
+  end
 
   def tag_list
      tags.collect{|t| t.name}.join(", ")
