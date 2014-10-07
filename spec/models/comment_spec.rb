@@ -4,16 +4,16 @@ describe Comment do
   let(:comment) { Fabricate(:comment) }
 
   it "should be valid with valid attributes" do
-    comment.should be_valid
+    expect(comment).to be_valid
   end
 
   it "should respond to article" do
-    comment.should respond_to(:article)
+    expect(comment).to respond_to(:article)
   end
 
   it "must have a value in article_id" do
     comment.article_id = nil
-    comment.should_not be_valid
+    expect(comment).to_not be_valid
   end
 
   context ".for_dashboard" do
@@ -24,8 +24,8 @@ describe Comment do
       expected = Comment.order('created_at DESC').limit(5).all
 
       comments = Comment.for_dashboard
-      comments.count.should eq(5)
-      comments.should eq(expected)
+      expect(comments.count).to eq(5)
+      expect(comments).to eq(expected)
     end
   end
 
@@ -33,14 +33,14 @@ describe Comment do
     it "gives the word count for all comments" do
       2.times { Fabricate(:comment, :body => "I think that...") }
 
-      Comment.total_word_count.should eq(6)
+      expect(Comment.total_word_count).to eq(6)
     end
   end
 
   context "#word_count" do
     it "gives the total number of words" do
       comment = Fabricate(:article, :body => "Four score and seven years ago...")
-      comment.word_count.should eq(6)
+      expect(comment.word_count).to eq(6)
     end
   end
 end

@@ -9,6 +9,8 @@ require 'database_cleaner'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
+  config.raise_errors_for_deprecations!
   config.mock_with :rspec
   config.use_transactional_fixtures = false
 

@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Article do
   let(:article) { Fabricate(:article) }
-  
+
   [:title, :body].each do |attribute|
     it "is not valid without a #{attribute}" do
       article.update_attributes(attribute => nil)
-      subject.should_not be_valid
+      expect(subject).to_not be_valid
     end
   end
-  
+
   context "when it has invalid attributes" do
     it "raises an execption when hard saving" do
       article.title = nil
@@ -20,19 +20,19 @@ describe Article do
   it "must have a unique title" do
     article.save
     second = article.dup
-    second.should_not be_valid
+    expect(second).to_not be_valid
   end
-  
+
   it "returns the title when converted to a string" do
-    article.to_s.should == article.title
+    expect(article.to_s).to eq article.title
   end
 
   it "responds to comments" do
-    article.should respond_to(:comments)
+    expect(article).to respond_to(:comments)
   end
 
   it "responds to .valid_ids with a set of all current article IDs" do
-    Article.valid_ids.should == Article.select(:id).collect{|a| a.id}
+    expect(Article.valid_ids).to eq Article.select(:id).collect{|a| a.id}
   end
 
   context ".for_dashboard" do
@@ -42,8 +42,8 @@ describe Article do
       end
       expected = Article.order('created_at DESC').limit(5).all
       articles = Article.for_dashboard
-      articles.count.should eq(5)
-      articles.should eq(expected)
+      expect(articles.count).to eq(5)
+      expect(articles).to eq(expected)
     end
   end
 
@@ -51,24 +51,24 @@ describe Article do
     it "gives the word count for all articles" do
       2.times { Fabricate(:article, :body => "I think that...") }
 
-      Article.total_word_count.should eq(6)
+      expect(Article.total_word_count).to eq(6)
     end
   end
 
   context "#word_count" do
     it "gives the total number of words" do
       article = Fabricate(:article, :body => "Four score and seven years ago...")
-      article.word_count.should eq(6)
+      expect(article.word_count).to eq(6)
     end
   end
 
   context ".most_popular" do
     it "returns the article with the most comments" do
       articles = (0..5).collect{ Fabricate(:article) }
-      Comment.destroy_all      
+      Comment.destroy_all
       target = articles[rand(articles.length)]
       Fabricate(:comment, :article => target)
-      Article.most_popular.should == target
+      expect(Article.most_popular).to eq target
     end
   end
 
@@ -76,7 +76,7 @@ describe Article do
     context "when given no parameter" do
       it "should return all the articles" do
         articles, tag = Article.search_by_tag_name(nil)
-        articles.should == Article.all
+        expect(articles).to eq Article.all
       end
     end
 
@@ -85,14 +85,14 @@ describe Article do
         it "should return the articles associated with that tag and the tag" do
           tag = Fabricate(:tag)
           tag.articles = [Fabricate(:article), Fabricate(:article)]
-          Article.search_by_tag_name(tag.name).should == [tag.articles, tag]
+          expect(Article.search_by_tag_name(tag.name)).to eq [tag.articles, tag]
         end
       end
 
       context "but the tag does not exist" do
         it "should return an empty list of articles and no tag" do
           bad_name = Fabricate(:tag).name + "_no_exist"
-          Article.search_by_tag_name(bad_name).should == [[], nil]
+          expect(Article.search_by_tag_name(bad_name)).to eq [[], nil]
         end
       end
     end

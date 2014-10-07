@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "front dashboard" do
+describe "front dashboard", :type => :feature do
 
   it "loads from the root path" do
     visit "/"
-    page.should have_content("Dashboard")
+    expect(page).to have_content("Dashboard")
   end
 
   context "recent articles" do
@@ -17,14 +17,14 @@ describe "front dashboard" do
     end
 
   	it "lists the five most recent articles" do
-      page.should have_content("Most Recent Articles")
-      all(".article").count.should eq(5)
+      expect(page).to have_content("Most Recent Articles")
+      expect(all(".article").count).to eq(5)
     end
 
   	it "lists them in reverse chronological order" do
       titles = page.all('li.article').map(&:text)
       titles.each_with_index do |title, i|
-        title.should include("Title #{titles.size - i}")
+        expect(title).to include("Title #{titles.size - i}")
       end
     end
   end
@@ -39,14 +39,14 @@ describe "front dashboard" do
     end
 
     it "lists the five most recent comments" do
-      page.should have_content("Most Recent Comments")
-      all(".comment").count.should eq(5)
+      expect(page).to have_content("Most Recent Comments")
+      expect(all(".comment").count).to eq(5)
     end
 
     it "lists them in reverse order" do
       listings = page.all('li.comment').map(&:text)
       listings.each_with_index do |listing, i|
-        listing.should include("Body #{listings.size - i}")
+        expect(listing).to include("Body #{listings.size - i}")
       end
     end
   end
@@ -56,33 +56,33 @@ describe "front dashboard" do
       number_of_articles = rand(10)
       number_of_articles.times { Fabricate(:article) }
       visit "/"
-      page.find("#total_articles").should have_content("Total articles: #{number_of_articles}")
+      expect(page.find("#total_articles")).to have_content("Total articles: #{number_of_articles}")
     end
 
     it "lists the total number of comments" do
       number_of_comments = rand(10)
       number_of_comments.times { Fabricate(:comment) }
       visit "/"
-      page.find("#total_comments").should have_content("Total comments: #{number_of_comments}")
+      expect(page.find("#total_comments")).to have_content("Total comments: #{number_of_comments}")
     end
 
     it "displays the total words of all articles" do
       Fabricate(:article, :body => "Four score and seven years...")
       visit "/"
-      page.find("#total_article_words").should have_content("5")
+      expect(page.find("#total_article_words")).to have_content("5")
     end
 
     it "displays the total words of all comments" do
       Fabricate(:comment, :body => "I think that...")
       visit "/"
-      page.find("#total_comment_words").should have_content("3")
+      expect(page.find("#total_comment_words")).to have_content("3")
     end
 
-    it "displays the total words of all articles and comments" do      
+    it "displays the total words of all articles and comments" do
       article = Fabricate(:article, :body => "Four score and seven years...")
       comment = Fabricate(:comment, :body => "I think that...", :article => article)
       visit "/"
-      page.find("#total_words").should have_content(comment.word_count + article.word_count)
+      expect(page.find("#total_words")).to have_content(comment.word_count + article.word_count)
     end
 
     it "displays the most popular (most comments) article" do
@@ -90,7 +90,7 @@ describe "front dashboard" do
       target = articles[rand(articles.size)]
       Fabricate(:comment, :article => target)
       visit "/"
-      page.find("#most_popular").should have_content(target.title)
+      expect(page.find("#most_popular")).to have_content(target.title)
     end
 
 
