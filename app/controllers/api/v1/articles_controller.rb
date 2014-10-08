@@ -1,5 +1,9 @@
 class Api::V1::ArticlesController < ApplicationController
+  force_ssl unless Rails.env.development?
+
   respond_to :json, :xml
+
+  before_action :authenticate
 
   def show
     respond_with Article.find(params[:id])
@@ -25,5 +29,15 @@ class Api::V1::ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body, :author_id)
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_basic("Please authenticate to use the API") do |email, password|
+      author = Author.find_by(email: email)
+
+      return true if author && author.authenticate(password)
+
+      head :unauthorized
+    end
   end
 end
