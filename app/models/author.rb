@@ -1,4 +1,6 @@
 class Author < ActiveRecord::Base
+  has_secure_password
+
   has_many :articles
 
   def self.generate_samples(count)
@@ -11,5 +13,4 @@ class Author < ActiveRecord::Base
   def self.random
     order('RANDOM()').limit(1).first
   end
-
 end

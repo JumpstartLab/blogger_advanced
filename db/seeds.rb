@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Author.generate_samples(10)
+%w(steve josh rachel jeff jorge).each do |name|
+  Author.create(name: name.capitalize, phone_number: "(123) 456-7890", password: "password", email: "#{name}@turing.io")
+end
+
 Tag.generate_samples(10)
-Article.generate_samples(10)
+Article.generate_samples(50)

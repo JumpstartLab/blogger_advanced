@@ -19,7 +19,12 @@
         <li><%= link_to "Create Article", new_article_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log In", login_path %></li>
+        <% if current_author %>
+          <li><%= link_to "Account", account_path %></li>
+          <li><%= link_to "Log Out", logout_path %></li>
+        <% else %>
+          <li><%= link_to "Log In", login_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

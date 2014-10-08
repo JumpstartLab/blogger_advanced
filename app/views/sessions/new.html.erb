@@ -1,1 +1,17 @@
-<%= button_to 'Log me in!', login_path, {:method => :post} %>
+<h1>Log In</h1>
+
+<hr>
+
+<%= form_tag login_path do %>
+  <div class="form-group">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, "", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :password %>
+    <%= password_field_tag :password, "", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag "Log In", class: "form-control btn btn-success" %>
+  </div>
+<% end %>
