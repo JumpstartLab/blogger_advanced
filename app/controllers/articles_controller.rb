@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :require_author, except: [:show, :index]
+
   def show
     @article = Article.find(params[:id])
   end
@@ -41,11 +43,11 @@ class ArticlesController < ApplicationController
     flash[:notice] = "#{article} was destroyed."
     redirect_to articles_path
   end
-  
+
   private
 
   def article_params
     params.require(:article).permit(:title, :body, :author_id)
   end
-  
+
 end
