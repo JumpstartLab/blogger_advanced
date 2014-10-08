@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     get :work
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :articles, except: [:new, :edit]
+    end
+  end
+
   get  '/login'     => 'sessions#new'
   post '/login'     => 'sessions#create'
   get  '/logout'    => 'sessions#destroy'
