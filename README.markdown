@@ -14,3 +14,16 @@ bundle
 rake db:migrate
 rails server
 ```
+
+## Branches
+
+There are some branches to show some functionality.
+
+* bootstrap: it's the updated Blogger. It will probably be merged into master soon.
+* api: shows a single responsibility API controller for the articles.
+* secure_api_with_basic_auth: implements basic authentication for the API articles controller.
+* secure_api_with_http_token: implements http token authentication for the API articles controller.
+
+## Contribute
+
+If you find something that is outdated or doesn't work, feel free to submit a pull request. All contributions are greatly appreciated.
