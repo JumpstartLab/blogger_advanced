@@ -32,12 +32,8 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   def authenticate
-    authenticate_or_request_with_http_basic("Please authenticate to use the API") do |email, password|
-      author = Author.find_by(email: email)
-
-      return true if author && author.authenticate(password)
-
-      head :unauthorized
+    authenticate_or_request_with_http_token do |token, options|
+      ApiKey.exists?(token: token)
     end
   end
 end

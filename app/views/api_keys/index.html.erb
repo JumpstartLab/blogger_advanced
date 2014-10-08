@@ -1,0 +1,15 @@
+<h1>Your API Keys</h1>
+
+<hr>
+
+<%= link_to "Create API Key", api_keys_path, method: :post, class: "btn btn-success" %>
+
+<% if current_author.api_keys.empty? %>
+  <h3>You don't have any API keys yet.</h3>
+<% else %>
+  <% current_author.api_keys.each do |api_key| %>
+    <h3><%= api_key.token %></h3>
+    <h4><%= format_date(api_key.created_at) %></h4>
+    <%= link_to "Delete", api_key_path(api_key), method: :delete %>
+  <% end %>
+<% end %>

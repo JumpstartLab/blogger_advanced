@@ -2,6 +2,7 @@ class Author < ActiveRecord::Base
   has_secure_password
 
   has_many :articles
+  has_many :api_keys
 
   def self.generate_samples(count)
     count.times do

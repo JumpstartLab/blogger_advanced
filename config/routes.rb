@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :articles
   resources :comments
+  resources :api_keys,  only: [:index, :create, :destroy] 
   resource  :account,   only: [:show] do
     get :work
   end
