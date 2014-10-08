@@ -1,42 +1,50 @@
 <h1>Blogger Dashboard</h1>
 
-<p>
-  <%= link_to "See All Articles", articles_path %>
-</p>
-<div class='dashboard_block'>
-  <h2>Most Recent Articles</h2>
-  <ul>
-    <% @articles.each do |article| %>
-      <li class="article"><%= link_to article.title, article %> published <%= article.created_at %></li>
-    <% end %>
-  </ul>
-</div>
+<hr>
 
 <div class='dashboard_block'>
-  <h2>Most Recent Comments</h2>
-  <ul>
-    <% @comments.each do |comment| %>
-      <li class="comment">
-      	<%= comment.author_name %>
-      	said
-      	"<%= comment.body %>"
-      	in response to
-      	<%= link_to comment.article.title, comment.article %>
-      	at
-      	<%= comment.created_at %>
-      </li>
-    <% end %>
-  </ul>
+  <h4>Most Recent Articles</h4>
+  <% @articles.each do |article| %>
+    <p>
+      <%= link_to article.title, article %>
+      <br>
+      Published on <%= format_date(article.created_at) %>
+    </p>
+  <% end %>
 </div>
+
+<hr>
+
+<div class='dashboard_block'>
+  <h4>Most Recent Comments</h4>
+  <% @comments.each do |comment| %>
+    <p>
+    	<%= format_date(comment.created_at) %>
+      <br>
+      <b><%= comment.author_name %></b>
+      <br>
+    	"<%= comment.body %>"
+      <br>
+    	<%= link_to comment.article.title, comment.article %>
+    </p>
+  <% end %>
+</div>
+
+<hr>
 
 <div class="dashboard_block" id='statistics'>
-  <h2>Site-Wide Statistics</h2>
-  <ul>
-  	<li id='total_articles'>Total articles: <%= @article_count %></li>
-  	<li id='total_comments'>Total comments: <%= @comment_count %></li>
-  	<li id='total_article_words'>Words in all articles: <%= @article_word_count %></li>
-  	<li id='total_comment_words'>Words in all comments: <%= @comment_word_count %></li>
-  	<li id='total_words'>Total Words: <%= @article_word_count + @comment_word_count %></li>
-  	<li id='most_popular'>Most Popular Article: <%= link_to @most_popular_article.title, @most_popular_article if @most_popular_article %></li>
-  </ul>
+  <h4>Site-Wide Statistics</h4>
+  	<p>
+      Total articles: <%= @article_count %>
+      <br>
+    	Total comments: <%= @comment_count %>
+    	<br>
+      Words in all articles: <%= @article_word_count %>
+    	<br>
+      Words in all comments: <%= @comment_word_count %>
+    	<br>
+      Total Words: <%= @article_word_count + @comment_word_count %>
+    	<br>
+      Most Popular Article: <%= link_to @most_popular_article.title, @most_popular_article if @most_popular_article %>
+    </p>
 </div>

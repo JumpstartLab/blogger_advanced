@@ -1,23 +1,23 @@
 <h1><%= @article.title %></h1>
-<h4>Published <%= @article.created_at %></h4>
-<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
+<h4>Published on <%= format_date(@article.created_at) %></h4>
+<p class='tag_list'><b>Tags:</b> <%= @article.tag_list %></p>
+
+<hr>
 
 <p><%= @article.body %></p>
 
+<hr>
 
 <div class='article_actions'>
-  <%= edit_icon(@article, "Edit") %>
-  <%= delete_icon(@article, "Delete") %>
-  <%= link_to "Back to All Articles", articles_path  %>
 </div>
 
-<h3><%= pluralize @article.comments.count, "Comment" %></h3>
+<h4><%= pluralize @article.comments.count, "Comment" %></h4>
 
 <div id='comments'>
   <% @article.comments.each do |comment| %>
     <div class='comment'>
       <p>
-        <em><%= comment.author_name %></em>
+        <b><%= comment.author_name %></b>
         said <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
       </p>
       <p><%= comment.body %></p>
@@ -25,16 +25,21 @@
   <% end %>
 </div>
 
-<h4>Add Your Comment</h4>
+<hr>
+
+<h4>New Comment</h4>
+
 <%= form_for(@article.comments.new) do |f| %>
-    <p>
-        <%= f.label :author_name %><br/>
-        <%= f.text_field :author_name %>
-    </p>
-    <p>
-        <%= f.label :body %><br/>
-        <%= f.text_area :body %>
-    </p>
+    <div class="form-group">
+        <%= f.label "Name" %><br/>
+        <%= f.text_field :author_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label "Comment" %><br/>
+        <%= f.text_area :body,         class: "form-control" %>
+    </div>
     <%= f.hidden_field :article_id%>
-    <%= f.submit "Save", :id => 'post_comment' %>
+    <%= f.submit "Submit Comment",     class: "form-control btn btn-success" %>
 <% end %>
+
+<br>

@@ -3,9 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '~> 4.1.6'
 gem 'sqlite3'
 gem 'jquery-rails'
-gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'sass-rails', '>= 3.2'
 
 group :development, :test do
   gem 'spring'
