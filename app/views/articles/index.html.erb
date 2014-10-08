@@ -15,9 +15,11 @@
 
   <h5><%= pluralize article.comments.count, "Comment" %></h5>
 
-  <div class="btn-group">
-    <%= link_to "View",   article_path(article),      method: :get,     class: "btn btn-default btn-xs" %>
-    <%= link_to "Edit",   edit_article_path(article), method: :get,     class: "btn btn-default btn-xs" %>
-    <%= link_to "Delete", article_path(article),      method: :destroy, class: "btn btn-default btn-xs", data: { confirm: "Do you want to delete this article?" } %>
-  </div>
+  <% if current_author %>
+    <div class="btn-group">
+      <%= link_to "View",   article_path(article),      method: :get,     class: "btn btn-default btn-xs" %>
+      <%= link_to "Edit",   edit_article_path(article), method: :get,     class: "btn btn-default btn-xs" %>
+      <%= link_to "Delete", article_path(article),      method: :delete,  class: "btn btn-default btn-xs", data: { confirm: "Do you want to delete this article?" } %>
+    </div>
+  <% end %>
 <% end %>
