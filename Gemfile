@@ -3,14 +3,12 @@ source 'http://rubygems.org'
 gem 'rails', '~> 4.1.6'
 gem 'sqlite3'
 gem 'jquery-rails'
-
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
 group :development, :test do
+  gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'faker'

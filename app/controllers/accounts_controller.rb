@@ -1,11 +1,9 @@
 class AccountsController < ApplicationController
-
-  before_filter :require_author
+  before_action :require_author
 
   def show
   end
 
   def work
   end
-
 end
