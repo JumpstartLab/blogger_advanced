@@ -1,4 +1,4 @@
-class AccountsController < Tenants::ApplicationController
+class Tenants::AccountsController < ApplicationController
   before_action :require_author
 
   def show

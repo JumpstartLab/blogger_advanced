@@ -3,14 +3,14 @@ module TagsHelper
     article.tags.collect(&:name).join(", ")
   end
 
-  def tag_links(tags)
-    link_to("<strong>all</strong>".html_safe, articles_path) + " " +
-    tag_list_items(tags)
+  def tag_links(tags, tenant)
+    link_to("<strong>all</strong>".html_safe, tenant_articles_path(tenant.slug)) + " " +
+    tag_list_items(tags, tenant)
   end
 
-  def tag_list_items(tags)
+  def tag_list_items(tags, tenant)
     tags.collect do |tag|
-      link_to(highlighted_tag_name(tag.name), articles_path(:tag => tag.name))
+      link_to(highlighted_tag_name(tag.name), tenant_articles_path(tenant.slug, tag: tag.name))
     end.join(" ").html_safe
   end
 

@@ -1,53 +1,54 @@
-class ArticlesController < Tenants::ApplicationController
+class Tenants::ArticlesController < ApplicationController
   before_action :require_author, except: [:show, :index]
 
   def show
-    @article = Article.find(params[:id])
+    @tenant  = Tenant.find_by(slug: params[:slug])
+    @article = @tenant.articles.find(params[:id])
   end
 
   def index
-    @articles, @tag = Article.search_by_tag_name(params[:tag])
+    @tenant         = Tenant.find_by(slug: params[:slug])
+    @articles, @tag = @tenant.articles.search_by_tag_name(params[:tag], @tenant)
   end
 
   def new
-    @article = Article.new
+    @article = current_author.articles.new
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_author.articles.new(article_params)
     if @article.save
       flash[:notice] = "Article was created."
-      redirect_to articles_path
+      redirect_to tenant_articles_path(current_tenant.slug)
     else
       render :new
     end
   end
 
   def edit
-    @article = Article.find params[:id]
+    @article = current_author.articles.find params[:id]
   end
 
   def update
-    @article = Article.find params[:id]
+    @article = current_author.articles.find params[:id]
     if @article.update_attributes(article_params)
       flash[:notice] = "Article was updated."
-      redirect_to article_path(@article)
+      redirect_to tenant_article_path(current_tenant.slug, @article)
     else
       render :edit
     end
   end
 
   def destroy
-    article = Article.find params[:id]
+    article = current_author.find params[:id]
     article.destroy
     flash[:notice] = "#{article} was destroyed."
-    redirect_to articles_path
+    redirect_to tenant_articles_path(current_tenant.slug)
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :author_id)
+    params.require(:article).permit(:title, :body, :author_id, :tag_list)
   end
-
 end

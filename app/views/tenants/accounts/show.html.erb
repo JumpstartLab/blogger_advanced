@@ -5,7 +5,7 @@
 <h3>Your <%= current_author.articles.count %> Articles</h3>
 
 <% current_author.articles.each do |article| %>
-  <h3><%= link_to article.title, article_path(article) %></h3>
+  <h3><%= link_to article.title, tenant_article_path(slug: current_tenant.slug, id: article.id) %></h3>
   <h4><%= article.comments.count %> Comments</h4>
   <% article.comments.each do |comment| %>
 	  <p>

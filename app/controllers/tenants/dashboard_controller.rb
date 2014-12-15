@@ -1,4 +1,4 @@
-class DashboardController < Tenants::ApplicationController
+class Tenants::DashboardController < ApplicationController
   before_action :require_author
 
   def show

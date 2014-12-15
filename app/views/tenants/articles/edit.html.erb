@@ -1,0 +1,28 @@
+<div class="col-md-2"></div>
+<div class="col-md-8">
+  <h1>Edit <%= @article.title %></h1>
+
+  <hr>
+
+    <%= form_for(@article, url: tenant_article_path(current_tenant, @article)) do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title,       class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label "Tags" %>
+        <%= f.text_field :tag_list,    class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body,         class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Update Article', class: "form-control btn btn-success" %>
+      </div>
+    <% end %>
+</div>
+<div class="col-md-2"></div>

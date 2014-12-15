@@ -1,0 +1,4 @@
+<% @tenants.each do |tenant| %>
+  <h1><%= link_to tenant.name, tenant_articles_path(tenant.slug) %></h1>
+  <p><%=  link_to "Login to #{tenant.name}", tenant_login_path(tenant.slug)%></p>
+<% end %>

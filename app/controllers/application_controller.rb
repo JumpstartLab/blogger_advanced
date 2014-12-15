@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   helper_method :current_author
+  helper_method :current_tenant
 
   def current_author
-    Author.find_by_id(session[:author_id])
+    @current_author ||= Author.find_by(id: session[:author_id])
+  end
+
+  def current_tenant
+    @current_tenant ||= Tenant.find_by(slug: session[:tenant_slug])
   end
 
   def require_author

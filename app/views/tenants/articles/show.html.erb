@@ -29,7 +29,7 @@
 
 <h4>New Comment</h4>
 
-<%= form_for(@article.comments.new) do |f| %>
+<%= form_for(@article.comments.new, url: tenant_comments_path(current_tenant.slug)) do |f| %>
     <div class="form-group">
         <%= f.label "Name" %><br/>
         <%= f.text_field :author_name, class: "form-control" %>

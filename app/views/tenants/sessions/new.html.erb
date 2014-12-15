@@ -4,7 +4,7 @@
 
   <hr>
 
-  <%= form_tag login_path do %>
+  <%= form_tag tenant_login_path(@tenant.slug) do %>
     <div class="form-group">
       <%= label_tag :email %>
       <%= text_field_tag :email, "", class: "form-control" %>

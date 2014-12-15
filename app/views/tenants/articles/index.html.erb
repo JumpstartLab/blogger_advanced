@@ -1,0 +1,25 @@
+<h1><%= @tag ? "Articles Tagged '#{@tag}'" : "All Articles" %></h1>
+
+<hr>
+
+<div id="sidebar">
+  Filter by Tag: <%= tag_links(Tag.all, @tenant) %>
+</div>
+
+<% @articles.each do |article| %>
+  <h3><%= link_to article.title, tenant_article_path(@tenant.slug, article) %></h3>
+
+  <h5><%= format_date(article.created_at) %></h5>
+
+  <h5><%= article.tag_list %></h5>
+
+  <h5><%= pluralize article.comments.count, "Comment" %></h5>
+
+  <% if current_author && @tenant == current_tenant %>
+    <div class="btn-group">
+      <%= link_to "View",   tenant_article_path(@tenant.slug, article),      method: :get,     class: "btn btn-default btn-xs" %>
+      <%= link_to "Edit",   edit_tenant_article_path(@tenant.slug, article), method: :get,     class: "btn btn-default btn-xs" %>
+      <%= link_to "Delete", tenant_article_path(@tenant.slug, article),      method: :delete,  class: "btn btn-default btn-xs", data: { confirm: "Do you want to delete this article?" } %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :tenants, path: "", param: :tenant_slug, except: [:index]
+  resources :tenants, path: "", param: :slug, except: [:index]
 
-  namespace :tenants, as: :tenant, path: "/:tenant_slug" do
+  namespace :tenants, as: :tenant, path: "/:slug" do
     get  '/login'     => 'sessions#new'
     post '/login'     => 'sessions#create'
     get  '/logout'    => 'sessions#destroy'

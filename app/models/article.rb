@@ -21,7 +21,7 @@ class Article < ActiveRecord::Base
     #self.tags = []
     names = input.split(",").collect{|text| text.strip.downcase}
     names.each do |name|
-      tag = Tag.find_or_create_by_name(name)
+      tag = Tag.find_or_create_by(name: name)
       self.tags << tag unless self.tags.include?(tag)
     end
     self.tags = self.tags.select{|tag| names.include?(tag.name)}
@@ -39,12 +39,12 @@ class Article < ActiveRecord::Base
     Article.select(:id).collect{|a| a.id}
   end
 
-  def self.search_by_tag_name(tag_name)
+  def self.search_by_tag_name(tag_name, tenant)
     if tag_name.blank?
-      [Article.order(created_at: :desc), nil]
+      [tenant.articles.order(created_at: :desc), nil]
     else
       tag = Tag.find_by_name(tag_name)
-      tag ? [tag.articles.order(created_at: :desc), tag] : [[], nil]
+      tag ? [tenant.articles.order(created_at: :desc).select { |article| article.tags.include?(tag) }, tag] : [[], nil]
     end
   end
 
