@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < Tenants::ApplicationController
   def new
   end
 

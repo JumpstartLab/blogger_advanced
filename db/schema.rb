@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008053648) do
+ActiveRecord::Schema.define(version: 20141215020649) do
+
+  create_table "api_keys", force: true do |t|
+    t.string   "token"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "api_keys", ["author_id"], name: "index_api_keys_on_author_id"
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -30,7 +39,10 @@ ActiveRecord::Schema.define(version: 20141008053648) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.integer  "tenant_id"
   end
+
+  add_index "authors", ["tenant_id"], name: "index_authors_on_tenant_id"
 
   create_table "comments", force: true do |t|
     t.integer  "article_id"
@@ -49,6 +61,13 @@ ActiveRecord::Schema.define(version: 20141008053648) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tenants", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

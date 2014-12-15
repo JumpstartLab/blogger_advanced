@@ -1,6 +1,6 @@
-class DashboardController < ApplicationController
+class DashboardController < Tenants::ApplicationController
   before_action :require_author
-  
+
   def show
     @articles             = Article.for_dashboard
     @article_count        = Article.count
