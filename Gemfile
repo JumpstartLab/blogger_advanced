@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'spring'
