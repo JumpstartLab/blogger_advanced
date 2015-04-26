@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'spring'
