@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 4.1.6'
-gem 'sqlite3'
+gem 'pg'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -15,7 +15,6 @@ group :development, :test do
   gem 'fabrication', "~> 2.2.2"
   gem 'guard'
   gem 'guard-rspec'
-  #gem 'rb-fsevent'
   gem 'database_cleaner'
   gem 'launchy'
 end

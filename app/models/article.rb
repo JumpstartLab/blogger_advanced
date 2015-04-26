@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  validates :title, :presence => true, :uniqueness => true
+  validates :title, :presence => true
   validates :body, :presence => true
 
   belongs_to :author
@@ -62,13 +62,18 @@ class Article < ActiveRecord::Base
 
   def self.generate_samples(quantity = 1000)
     tags = Tag.all
-    quantity.times do
-      article = Fabricate(:article)
-      article.created_at = article.created_at - (rand(300) + 100).hours
-      article.tags = tags.sort_by{ rand }[0..rand(tags.length)]
-      article.save
-      rand(2..15).times do
-      	Fabricate(:comment, :article => article, :created_at => article.created_at + rand(100).hours)
+    quantity.times do |i|
+      puts "generating article #{i}"
+      article = Fabricate(:article, created_at: (Time.now - (rand(600).hours)))
+      5.times do
+        begin
+          article.tags << tags.sample
+        rescue ActiveRecord::RecordInvalid
+          #tried to make a dup tag, dont care
+        end
+      end
+      rand(2..8).times do
+        Fabricate(:comment, :article => article, :created_at => article.created_at + rand(100).hours)
       end
       yield if block_given?
     end
