@@ -1,9 +1,13 @@
-# Blogger Advanced
+# Blogger Advanced -- Perf Workshop
 
-This is a sample project for use with the tutorials at http://tutorials.jumpstartlab.com
+This is a branch of the blogger project intended for a performance
+optimization workshop at Turing. The project includes several tweaks to
+produce some performance issues for students to troubleshoot, including:
 
-Please do _not_ take it as a set of best practices. In fact, there are many intentional inefficiencies or points of ugliness setup for "fixing" through [tutorial exercises](http://tutorials.jumpstartlab.com/projects/ruby.html).
-
+* Larger seed file
+* Switched DB to Postgres
+* Pre-built DB dump to expedite seeding data
+* Skylight.io installation to aid in diagnosing perf bottlenecks
 
 ## Getting Started
 
@@ -14,15 +18,6 @@ bundle
 rake db:migrate
 rails server
 ```
-
-## Branches
-
-There are some branches to show some functionality.
-
-* bootstrap: it's the updated Blogger. It will probably be merged into master soon.
-* api: shows a single responsibility API controller for the articles.
-* secure_api_with_basic_auth: implements basic authentication for the API articles controller.
-* secure_api_with_http_token: implements http token authentication for the API articles controller.
 
 ## Contribute
 
