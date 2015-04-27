@@ -8,6 +8,8 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'newrelic_rpm'
 gem 'dalli'
+gem "redis"
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'spring'

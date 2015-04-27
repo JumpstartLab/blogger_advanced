@@ -125,6 +125,9 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    redis (3.2.1)
+    redis-namespace (1.5.1)
+      redis (~> 3.0, >= 3.0.4)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -195,6 +198,8 @@ DEPENDENCIES
   newrelic_rpm
   pg
   rails (~> 4.1.6)
+  redis
+  redis-namespace
   rspec-rails
   sass-rails
   spring
