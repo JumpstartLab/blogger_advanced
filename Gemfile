@@ -7,6 +7,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'newrelic_rpm'
+gem 'dalli'
 
 group :development, :test do
   gem 'spring'

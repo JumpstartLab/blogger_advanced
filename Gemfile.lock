@@ -46,6 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
+    dalli (2.7.4)
     database_cleaner (1.4.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -183,6 +184,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   coffee-rails
+  dalli
   database_cleaner
   fabrication (~> 2.2.2)
   faker

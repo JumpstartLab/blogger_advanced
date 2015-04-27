@@ -34,4 +34,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  ## CACHING SETTINGS
+  # Global enable/disable all memcached usage
+  config.perform_caching = true
+  # Disable/enable fragment and page caching in ActionController
+  config.action_controller.perform_caching = true
+  # The underlying cache store to use.
+  config.cache_store = :dalli_store, 'localhost:11211'
 end
