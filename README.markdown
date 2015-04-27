@@ -108,7 +108,7 @@ a quick performance summary of your recent web requests.
 
 It should look something like:
 
-![NewRelic Agent Dev Mode](https://www.evernote.com/shard/s294/sh/ea3c3662-a7e3-4044-b647-b3b92cfbdd0b/8b9f18be24aedd7a67d670f8cb7619a0)
+![NewRelic Agent Dev Mode](https://www.evernote.com/shard/s294/sh/ea3c3662-a7e3-4044-b647-b3b92cfbdd0b/8b9f18be24aedd7a67d670f8cb7619a0/res/6ccedb01-70ff-4e8a-a0e3-a38795b72b4d/skitch.png?resizeSmall&width=832)
 
 ## Contribute
 
