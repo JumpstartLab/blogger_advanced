@@ -63,14 +63,39 @@ Things that make a good fit for redis include
   read up on some of redis' set-manipulation features if you find
   yourself doing this frequently)
 
-## Getting Started
+## Getting Started -- Checking Out the Branch and Loading Sample Data
+
+Since generating a large amount of sample data via a DB seed task takes
+time, this branch includes a pre-built dataset in the form of a postgres
+DB dump. This is a data format similar to what you might use to backup a
+production postgres system.
+
+A `pg_dump` is basically a direct snapshot of all the data contained in
+the DB at a given time. As such it's much quicker for your local
+postgres server to load all this data than it would be for you to
+re-generate all the data via the seed task yourself.
+
+To get set up with the app, checkout the branch, and load the sample
+data, run these commands:
 
 ```bash
 git clone git://github.com/JumpstartLab/blogger_advanced.git
 cd blogger_advanced
+git checkout -t blogger-perf-workshop
 bundle
-rake db:migrate
-rails server
+rake sample_data:load
+```
+
+You should see a bunch of output from postgres as it loads up each table
+from the db dump. Once it finishes, you can verify your dataset by
+firing up a rails console and checking counts for our models:
+
+```
+rails c
+Loading development environment (Rails 4.1.10)
+irb(main):001:0> Article.count
+   (21.7ms)  SELECT COUNT(*) FROM "articles"
+=> 70001
 ```
 
 ## Contribute
