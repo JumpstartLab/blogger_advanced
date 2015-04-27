@@ -10,6 +10,41 @@ produce some performance issues for students to troubleshoot, including:
 * Skylight.io installation to aid in diagnosing perf bottlenecks
 * Caching libraries included
 
+## Getting Started -- Checking Out the Branch and Loading Sample Data
+
+Since generating a large amount of sample data via a DB seed task takes
+time, this branch includes a pre-built dataset in the form of a postgres
+DB dump. This is a data format similar to what you might use to backup a
+production postgres system.
+
+A `pg_dump` is basically a direct snapshot of all the data contained in
+the DB at a given time. As such it's much quicker for your local
+postgres server to load all this data than it would be for you to
+re-generate all the data via the seed task yourself.
+
+To get set up with the app, checkout the branch, and load the sample
+data, run these commands:
+
+```bash
+git clone git://github.com/JumpstartLab/blogger_advanced.git
+cd blogger_advanced
+git checkout -t origin/blogger-perf-workshop
+bundle
+rake sample_data:load
+```
+
+You should see a bunch of output from postgres as it loads up each table
+from the db dump. Once it finishes, you can verify your dataset by
+firing up a rails console and checking counts for our models:
+
+```
+rails c
+Loading development environment (Rails 4.1.10)
+irb(main):001:0> Article.count
+   (21.7ms)  SELECT COUNT(*) FROM "articles"
+=> 70001
+```
+
 ## Dependencies for blogger-perf-workshop branch
 
 This branch is intended to be a playground for exploring some additional
@@ -20,7 +55,7 @@ additional dependencies. Make sure you have:
 * Redis installed and running
 * Memcached installed and running
 
-### Caching Utilities
+## Caching Utilities
 
 __Memcached__
 
@@ -63,40 +98,17 @@ Things that make a good fit for redis include
   read up on some of redis' set-manipulation features if you find
   yourself doing this frequently)
 
-## Getting Started -- Checking Out the Branch and Loading Sample Data
+## Performance Auditing
 
-Since generating a large amount of sample data via a DB seed task takes
-time, this branch includes a pre-built dataset in the form of a postgres
-DB dump. This is a data format similar to what you might use to backup a
-production postgres system.
+This branch of blogger comes pre-configured with the NewRelic RPM agent.
+NewRelic includes a simplified version of the monitoring tools in the
+development environment. With your server running, visit
+[http://localhost:3000/newrelic](http://localhost:3000/newrelic) to see
+a quick performance summary of your recent web requests.
 
-A `pg_dump` is basically a direct snapshot of all the data contained in
-the DB at a given time. As such it's much quicker for your local
-postgres server to load all this data than it would be for you to
-re-generate all the data via the seed task yourself.
+It should look something like:
 
-To get set up with the app, checkout the branch, and load the sample
-data, run these commands:
-
-```bash
-git clone git://github.com/JumpstartLab/blogger_advanced.git
-cd blogger_advanced
-git checkout -t blogger-perf-workshop
-bundle
-rake sample_data:load
-```
-
-You should see a bunch of output from postgres as it loads up each table
-from the db dump. Once it finishes, you can verify your dataset by
-firing up a rails console and checking counts for our models:
-
-```
-rails c
-Loading development environment (Rails 4.1.10)
-irb(main):001:0> Article.count
-   (21.7ms)  SELECT COUNT(*) FROM "articles"
-=> 70001
-```
+![NewRelic Agent Dev Mode](https://www.evernote.com/shard/s294/sh/ea3c3662-a7e3-4044-b647-b3b92cfbdd0b/8b9f18be24aedd7a67d670f8cb7619a0)
 
 ## Contribute
 
