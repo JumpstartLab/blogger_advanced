@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 4.1.6'
-gem 'sqlite3'
+gem 'pg'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
