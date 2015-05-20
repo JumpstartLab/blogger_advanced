@@ -183,7 +183,7 @@ DEPENDENCIES
   capybara
   coffee-rails
   database_cleaner
-  fabrication (~> 2.2.2)
+  fabrication
   faker
   guard
   guard-rspec
