@@ -6,13 +6,13 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'fabrication'
 
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'faker'
-  gem 'fabrication', "~> 2.2.2"
   gem 'guard'
   gem 'guard-rspec'
   #gem 'rb-fsevent'
