@@ -8,6 +8,7 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'fabrication'
 gem 'faker'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'spring'
