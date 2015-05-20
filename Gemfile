@@ -9,6 +9,7 @@ gem 'uglifier'
 gem 'fabrication'
 gem 'faker'
 gem 'rails_12factor', group: :production
+gem 'skylight'
 
 group :development, :test do
   gem 'spring'
