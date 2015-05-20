@@ -12,6 +12,7 @@ gem 'rails_12factor', group: :production
 gem 'skylight'
 
 group :development, :test do
+  gem 'selenium-webdriver'
   gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
