@@ -56,8 +56,10 @@ end
 namespace :load_script do
   desc "Run a simple load script against your server"
   task :run => :environment do
-    raise "Please provide a server url as an ENV variable (e.g. SERVER_URL=my_url.com rake load_script:run)" unless ENV["SERVER_URL"]
-    LoadScript.new(ENV["SERVER_URL"]).run
+    unless ENV["SERVER_URL"]
+      puts "No SERVER_URL provided, using http://localhost:3000 as default. Provide SERVER_URL as an ENV variable to override"
+    end
+    LoadScript.new(ENV["SERVER_URL"] || "http://localhost:3000").run
   end
 end
 
