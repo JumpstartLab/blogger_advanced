@@ -15,7 +15,7 @@ group :development, :test do
   gem 'fabrication', "~> 2.2.2"
   gem 'guard'
   gem 'guard-rspec'
-  #gem 'rb-fsevent'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
