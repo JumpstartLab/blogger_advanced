@@ -15,13 +15,7 @@
 
 <div id='comments'>
   <% @article.comments.each do |comment| %>
-    <div class='comment'>
-      <p>
-        <em><%= comment.author_name %></em>
-        said <%= distance_of_time_in_words(@article.created_at, comment.created_at) %> later:
-      </p>
-      <p><%= comment.body %></p>
-    </div>
+    <%= render partial: "articles/comment", locals: {comment: comment, article: @article} %>
   <% end %>
 </div>
 
