@@ -34,7 +34,9 @@ function commentData() {
 
 function postCommentData() {
   $.post("/comments", commentData(), function(data) {
-    console.log(data);
+    $("#comments").append(data);
+    $("#comment_body").val("");
+    $("#comment_author_name").val("");
   });
 }
 
