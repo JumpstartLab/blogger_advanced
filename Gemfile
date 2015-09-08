@@ -14,6 +14,7 @@ gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'poltergeist'
+  gem 'selenium-webdriver'
   gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
