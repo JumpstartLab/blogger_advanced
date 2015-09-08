@@ -19,12 +19,17 @@ unless Rails.env.production?
     end
 
     def actions
-      [:category, :article, :article_index, :add_comment, :add_article]
+      [:category, :article, :article_index, :add_comment, :add_article, :dashboard]
     end
 
     def category
       puts "viewing a random tag"
       session.visit "#{root}/articles?tag=tag_#{rand(10)}"
+    end
+
+    def dashboard
+      puts "viewing dashboard"
+      session.visit root
     end
 
     def article
