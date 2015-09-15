@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :articles
+  resources :articles do
+    resources :likes, only: [:create]
+    delete 'likes', to: "likes#destroy"
+  end
   resources :comments
   resource  :dashboard
   resource  :account, :only => [:show] do

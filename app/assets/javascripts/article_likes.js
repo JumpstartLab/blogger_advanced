@@ -1,26 +1,20 @@
-var Hello = React.createClass(
-  {
-    render: function() {
-      console.log(this.props)
-      return React.createElement("div", null,
-				 React.createElement("p", null, React.createElement("span", null, "hello")))
-    }
-  }
-);
-
 var LikeArticle = React.createClass({
-  clickHandler: function() {
-    this.setState({isLiked: !this.state.isLiked});
-  },
-  fetchNewArticleData: functio() {
-  },
   render: function() {
-    console.log(this.state);
     if (this.state.isLiked) {
-      return React.createElement("div", {onClick: this.clickHandler }, "Un-Like Me!")
+      return React.createElement("div", {onClick: this.handleClick}, "Un-Like Me!");
     } else {
-      return React.createElement("div", {onClick: this.clickHandler }, "Like Me!")
+      return React.createElement("div", {onClick: this.handleClick}, "Like Me!");
     }
+  },
+  handleClick: function() {
+    var method = this.state.isLiked ? "DELETE" : "POST";
+    $.ajax({
+      url: '/articles/' + this.props.articleID + "/likes",
+      type: method,
+      success: function(response) {
+	this.setState({isLiked: response.liked});
+      }.bind(this)
+    });
   },
   getInitialState: function() {
     return {isLiked: this.props.initialIsLiked};
@@ -30,13 +24,12 @@ var LikeArticle = React.createClass({
 $(document).ready(function() {
   $(".like-article").each(function(index, element) {
     var props = {
-      initialIsLiked: $(element).data("initial-is-liked")
+      initialIsLiked: $(element).data("initial-is-liked"),
+      articleID: $(element).data("article-id")
     }
     React.render(
-      React.createElement(LikeArticle,
-			  props),
+      React.createElement(LikeArticle, props),
       element
-    )
+    );
   });
 });
-
