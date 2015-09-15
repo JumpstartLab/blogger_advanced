@@ -38,8 +38,7 @@ class ArticlesController < ApplicationController
   def destroy
     article = Article.find params[:id]
     article.destroy
-    flash[:notice] = "#{article} was destroyed."
-    redirect_to articles_path
+    render json: {success: "OK"}
   end
   
   private

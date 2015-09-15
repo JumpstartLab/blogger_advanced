@@ -5,6 +5,9 @@ var Article = React.createClass({
   editUrl: function() {
     return this.url() + "/edit";
   },
+  deleteHandler: function() {
+    this.props.deleteHandler(this.props.article.id);
+  },
   render: function() {
     return (
       <li>
@@ -17,6 +20,9 @@ var Article = React.createClass({
       <span className="actions">
         <a href={this.editUrl()}>
           <img src="/assets/page_edit.png" />
+        </a>
+        <a href="#" onClick={this.deleteHandler}>
+          <img src="/assets/cancel.png" />
         </a>
       </span>
       <LikeArticle

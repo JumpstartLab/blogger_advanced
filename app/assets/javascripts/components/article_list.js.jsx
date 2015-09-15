@@ -1,13 +1,27 @@
 var ArticleList = React.createClass({
   articleComponents: function() {
-    return this.props.articles.map(function(a) {
+    var list = this;
+    return this.state.articles.map(function(a) {
       return (
 	<Article
 	article={a}
+	deleteHandler={list.deleteArticle}
 	key={"article-" + a.id}
 	/>
       )
     });
+  },
+  deleteArticle: function(articleID) {
+    $.ajax({
+      url: "/articles/" + articleID,
+      type: "DELETE",
+      success: function() {
+	var updatedList = this.state.articles.filter(function(a) {
+	  return a.id !== articleID;
+	});
+	this.setState({articles: updatedList});
+      }.bind(this)
+    })
   },
   render: function() {
     return(
@@ -15,5 +29,8 @@ var ArticleList = React.createClass({
       {this.articleComponents()}
       </ul>
     );
+  },
+  getInitialState: function() {
+    return { articles: this.props.articles };
   }
 });
