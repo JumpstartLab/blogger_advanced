@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'react-rails', '~> 1.0'
 
 group :development, :test do
   gem 'spring'

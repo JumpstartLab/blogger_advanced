@@ -15,7 +15,7 @@
         <%= edit_icon(article) %>
         <%= delete_icon(article) %>
       </span>
-      <div class="like-article" data-article-id="<%= article.id %>" data-initial-is-liked="<%= article.liked %>"></div>
+      <%= react_component("LikeArticle", {articleID: article.id, initialIsLiked: article.liked}) %>
       <%= pluralize article.comments.count, "Comment" %>
     </li>
   <% end %>
