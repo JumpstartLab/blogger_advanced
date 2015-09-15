@@ -8,15 +8,6 @@
 
 <ul id="articles">
   <% @articles.each do |article| %>
-    <li>
-      <%= link_to article.title, article_path(article) %>
-      <span class='tag_list'><%= article.tag_list %></span>
-      <span class='actions'>
-        <%= edit_icon(article) %>
-        <%= delete_icon(article) %>
-      </span>
-      <%= react_component("LikeArticle", {articleID: article.id, initialIsLiked: article.liked}) %>
-      <%= pluralize article.comments.count, "Comment" %>
-    </li>
+    <%= react_component("Article", {article: article.as_json, tagList: article.tag_list, commentsCount: pluralize(article.comments.count, "Comment")}) %>
   <% end %>
 </ul>

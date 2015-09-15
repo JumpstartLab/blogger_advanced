@@ -2,14 +2,14 @@ var LikeArticle = React.createClass({
   render: function() {
     if (this.state.isLiked) {
       return (
-        <div onClick={this.handleClick}>
-	  Un-like Me!
+	<div onClick={this.handleClick}>
+	Un-like Me!
 	</div>
       )
     } else {
       return (
-        <div onClick={this.handleClick}>
-	  Like Me!
+	<div onClick={this.handleClick}>
+	Like Me!
 	</div>
       )
     }
