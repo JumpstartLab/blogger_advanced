@@ -6,8 +6,4 @@
   Filter by Tag: <%= tag_links(Tag.all) %>
 </div>
 
-<ul id="articles">
-  <% @articles.each do |article| %>
-    <%= react_component("Article", {article: article.as_json, tagList: article.tag_list, commentsCount: pluralize(article.comments.count, "Comment")}) %>
-  <% end %>
-</ul>
+<%= react_component("ArticleList", {articles: @articles.as_json}) %>

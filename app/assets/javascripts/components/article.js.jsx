@@ -12,7 +12,7 @@ var Article = React.createClass({
         {this.props.article.title}
       </a>
       <span className="tag_list">
-        {this.props.tagList}
+        {this.props.article.tag_list}
       </span>
       <span className="actions">
         <a href={this.editUrl()}>
@@ -24,7 +24,7 @@ var Article = React.createClass({
         initialIsLiked={this.props.article.liked}
         />
       <span>
-        {this.props.commentsCount}
+        {this.props.article.comments_count + " Comments"}
       </span>
       </li>
     )
