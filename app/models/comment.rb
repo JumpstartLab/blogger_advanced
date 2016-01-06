@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :article
+  belongs_to :article, counter_cache: true
 
   validates :article_id, :presence => true
 

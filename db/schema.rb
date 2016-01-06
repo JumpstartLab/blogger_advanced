@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130408190802) do
+ActiveRecord::Schema.define(version: 20160106174100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20130408190802) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"
+    t.integer  "comments_count", default: 0
   end
 
   create_table "authors", force: true do |t|
@@ -42,12 +43,17 @@ ActiveRecord::Schema.define(version: 20130408190802) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+
   create_table "taggings", force: true do |t|
     t.integer  "article_id"
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "taggings", ["article_id"], name: "index_taggings_on_article_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"

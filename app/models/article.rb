@@ -9,6 +9,12 @@ class Article < ActiveRecord::Base
 
   #default_scope :include => [:comments, :tags]
 
+  def cached_comment_count
+    Rails.cache.fetch("article-#{id}-comments-count") do
+      comments.count
+    end
+  end
+
   def to_s
     return title
   end
@@ -39,12 +45,12 @@ class Article < ActiveRecord::Base
     Article.select(:id).collect{|a| a.id}
   end
 
-  def self.search_by_tag_name(tag_name)
+  def self.search_by_tag_name(tag_name, page = 1)
     if tag_name.blank?
-      [Article.all, nil]
+      [Article.paginate(page: page, per_page: 10), nil]
     else
       tag = Tag.find_by_name(tag_name)
-      tag ? [tag.articles, tag] : [[], nil]
+      tag ? [tag.articles.paginate(page: page, per_page: 10), tag] : [[], nil]
     end
   end
 
