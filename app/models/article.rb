@@ -47,10 +47,10 @@ class Article < ActiveRecord::Base
 
   def self.search_by_tag_name(tag_name, page = 1)
     if tag_name.blank?
-      [Article.paginate(page: page, per_page: 10), nil]
+      [Article.includes(:comments, :tags).paginate(page: page, per_page: 20), nil]
     else
       tag = Tag.find_by_name(tag_name)
-      tag ? [tag.articles.paginate(page: page, per_page: 10), tag] : [[], nil]
+      tag ? [tag.articles.includes(:comments, :tags).paginate(page: page, per_page: 20), tag] : [[], nil]
     end
   end
 
@@ -63,7 +63,9 @@ class Article < ActiveRecord::Base
   end
 
   def self.total_word_count
-    all.inject(0) {|total, a| total += a.word_count }
+    Rails.cache.fetch("article-total-word-count") do
+      all.inject(0) {|total, a| total += a.word_count }
+    end
   end
 
   def self.generate_samples(quantity = 1000)

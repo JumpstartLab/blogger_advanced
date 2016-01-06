@@ -15,7 +15,7 @@
         <%= edit_icon(article) %>
         <%= delete_icon(article) %>
       </span>
-      <%= pluralize article.comments.count, "Comment" %>
+      <%= pluralize article.comments.length, "Comment" %>
     </li>
   <% end %>
 </ul>
