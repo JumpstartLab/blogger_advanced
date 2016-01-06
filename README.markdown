@@ -53,21 +53,24 @@ additional dependencies. Make sure you have:
 
 * Postgres installed and running
 * Redis installed and running
-* Memcached installed and running
 
 ## Caching Utilities
 
 __Memcached__
 
-This app comes pre-configured with Dalli (a ruby memcached client) as
-its cache store. Anywhere in the app you can use `Rails.cache` to read
+This app comes pre-configured with Redis as its cache store.
+Anywhere in the app you can use `Rails.cache` to read
 or write data to/from memcached.
 
-Remember that memcached is best used for short-term data that can be
+Using the cache, you can set a key/value pair in the cache
+using `Rails.cache.write("key", "value")` and read it using
+`Rails.cache.read("key")`
+
+Additionally, you can use the cache helper `cache { "stuff" }` from
+within your view templates.
+
+Remember that a cache is best used for short-term data that can be
 easily re-generated if it expires or gets evicted by the cache server.
-One of the main differences between redis and memcached is that a
-memcached server will evict keys as necessary if it starts to run out of
-space, so consider this when deciding what data to write to the cache.
 
 __Redis__
 

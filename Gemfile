@@ -7,9 +7,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'newrelic_rpm'
-gem 'dalli'
-gem "redis"
-gem 'redis-namespace'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'spring'
