@@ -56,7 +56,7 @@ additional dependencies. Make sure you have:
 
 ## Caching Utilities
 
-__Memcached__
+__Redis__
 
 This app comes pre-configured with Redis as its cache store.
 Anywhere in the app you can use `Rails.cache` to read
@@ -71,35 +71,6 @@ within your view templates.
 
 Remember that a cache is best used for short-term data that can be
 easily re-generated if it expires or gets evicted by the cache server.
-
-__Redis__
-
-This branch also includes a pre-configured redis connection intended for
-use caching data. This is set up in `config/initializers/redis.rb`. The
-connection is configured to use a namespace for all of our data and is
-assigned to a constant which can be accessed from anywhere in the app.
-e.g:
-
-```
-REDIS.set("my-key", "my-value")
-REDIS.get("my-key")
-=> "my-value"
-```
-
-Redis and memcached serve similar niches in a rails production stack,
-but most developers tend to use redis for caching smaller, specific
-pieces of data. Unlike memcached, redis won't evict your keys when it
-fills up, although it does set include a time-based expiration for all
-keys by default.
-
-Things that make a good fit for redis include
-
-* Ids or slugs of specific data entities ("most popular article", "most
-  frequently read author", etc)
-* Small JSON payloads describing important or expensive-to-generate data
-* Sets or collections of data ("ids of all articles for a tag", etc --
-  read up on some of redis' set-manipulation features if you find
-  yourself doing this frequently)
 
 ## Performance Auditing
 

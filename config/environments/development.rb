@@ -41,5 +41,5 @@ Rails.application.configure do
   # Disable/enable fragment and page caching in ActionController
   config.action_controller.perform_caching = true
   # The underlying cache store to use.
-  config.cache_store = :dalli_store, 'localhost:11211'
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 30.minutes }
 end
