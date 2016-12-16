@@ -1,18 +1,21 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 4.1.6'
-gem 'sqlite3'
+gem 'pg'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'fabrication'
+gem 'faker'
+gem 'rails_12factor', group: :production
+gem 'skylight'
+gem 'selenium-webdriver'
 
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'faker'
-  gem 'fabrication', "~> 2.2.2"
   gem 'guard'
   gem 'guard-rspec'
   #gem 'rb-fsevent'
