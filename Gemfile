@@ -7,7 +7,6 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'newrelic_rpm'
 gem 'redis-rails'
 gem 'skylight'
 gem 'bootsnap', '>= 1.1.0', require: false

@@ -30,6 +30,16 @@ git clone git://github.com/JumpstartLab/blogger_advanced.git
 cd blogger_advanced
 git checkout -t origin/blogger-perf-workshop
 bundle
+```
+
+1. Next, sign up for [Skylight](https://www.skylight.io/signup) using GitHub.
+1. Add a new app to your Skylight dashboard. This is in the upper left corner of your dashboard as of this writing.
+1. On the next screen you should see a line that looks like this: `bundle exec skylight setup <setup token>`. Copy the line with the real setup token and run in your terminal from within this project diretory. This sets up your app to talk to Skylight.
+1. Make sure you don't commit your API token. Use ENV variables if you plan on pushing code changes to GitHub. This project has `figaro` installed already if that's your preference.
+
+Load our large dataset by running this rake task in your terminal:
+
+```
 rake sample_data:load
 ```
 
@@ -39,11 +49,16 @@ firing up a rails console and checking counts for our models:
 
 ```
 rails c
-Loading development environment (Rails 4.1.10)
 irb(main):001:0> Article.count
    (21.7ms)  SELECT COUNT(*) FROM "articles"
 => 70001
 ```
+
+Next, confirm Skylight is picking up your page loads. The root page will take forever to load so navigate to [/http://localhost:3000/articles/3](http://localhost:3000/articles/3) and reload five times.
+
+Take a look at the `development` analytics page for your new app. You can switch the enviroment you are looking at by selecting the drop down in the upper left corner, to the right of the app name, on the Skylight dashboard.
+
+It might take a few minutes for the data to show up so be patient. If you don't see it in 5 minutes something probably went wrong.
 
 ## Dependencies for blogger-perf-workshop branch
 
@@ -74,15 +89,11 @@ easily re-generated if it expires or gets evicted by the cache server.
 
 ## Performance Auditing
 
-This branch of blogger comes pre-configured with the NewRelic RPM agent.
-NewRelic includes a simplified version of the monitoring tools in the
-development environment. With your server running, visit
-[http://localhost:3000/newrelic](http://localhost:3000/newrelic) to see
-a quick performance summary of your recent web requests.
+This branch of blogger comes pre-configured with the Skylight.io gem installed.
 
-It should look something like:
+By default, Skylight records results against production applications. This app has been configured to measure performance while running in development. This is not typical behavior but we're using this as a way to learn to use the tools.
 
-![NewRelic Agent Dev Mode](https://www.evernote.com/shard/s294/sh/ea3c3662-a7e3-4044-b647-b3b92cfbdd0b/8b9f18be24aedd7a67d670f8cb7619a0/res/6ccedb01-70ff-4e8a-a0e3-a38795b72b4d/skitch.png?resizeSmall&width=832)
+In `config/application.rb` the line `config.skylight.environments += ["development"]` lets Skylight know to record in dev mode.
 
 ## Contribute
 
